@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
-import { MapPin, Clock, ExternalLink, Utensils, ShoppingBag, Star, ArrowRight, Quote, Phone } from "lucide-react";
+import { MapPin, Clock, ExternalLink, Utensils, ShoppingBag, Star, ArrowRight, Phone } from "lucide-react";
 import { Timeline } from "../components/Timeline";
 import StoreGallery from "../components/StoreGallery";
+import { TestimonialsSection } from "../components/ui/testimonials-with-marquee";
 import { shop1, shop4 } from "../constants";
-import { motion, useInView } from "motion/react";
+import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 /* ── Open/Closed status helper ─────────────────────────────────── */
@@ -212,43 +213,55 @@ const timelineData = [
   },
 ];
 
-/* ── Testimonials ──────────────────────────────────────────────── */
+/* ── Testimonials data for marquee ─────────────────────────────── */
 const testimonials = [
   {
-    quote: "The King Fusion Burger is absolutely mind-blowing! Never thought a veg burger could taste this good. We drive all the way from Hazratganj just for this.",
-    name: "Priya Sharma",
-    detail: "Regular at Antas Mall",
-    store: "Antas Mall",
+    author: {
+      name: "Priya Sharma",
+      handle: "Regular at Antas Mall",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+    },
+    text: "The King Fusion Burger is absolutely mind-blowing! Never thought a veg burger could taste this good. We drive all the way from Hazratganj just for this.",
   },
   {
-    quote: "CrushBurg is our family's go-to every weekend. The Crunchy Tandoori Burger is my son's favourite — he refuses to eat anywhere else now!",
-    name: "Rajesh Gupta",
-    detail: "Indira Nagar local",
-    store: "Indira Nagar",
+    author: {
+      name: "Rajesh Gupta",
+      handle: "Indira Nagar local",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    },
+    text: "CrushBurg is our family's go-to every weekend. The Crunchy Tandoori Burger is my son's favourite — he refuses to eat anywhere else now!",
   },
   {
-    quote: "Genuinely the best veg burger I've had in Lucknow. Fresh, crispy, and the sauces are on another level. The fries are addictive too!",
-    name: "Ananya Verma",
-    detail: "Food blogger, Lucknow",
-    store: "Antas Mall",
+    author: {
+      name: "Ananya Verma",
+      handle: "Food blogger, Lucknow",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+    },
+    text: "Genuinely the best veg burger I've had in Lucknow. Fresh, crispy, and the sauces are on another level. The fries are addictive too!",
   },
   {
-    quote: "Took my whole office team here for a treat and everyone loved it. The Paneer Wrap and the cold coffee are a deadly combo. Will definitely come back!",
-    name: "Vikram Sinha",
-    detail: "Gomti Nagar, Lucknow",
-    store: "Indira Nagar",
+    author: {
+      name: "Vikram Sinha",
+      handle: "Gomti Nagar, Lucknow",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    },
+    text: "Took my whole office team here for a treat and everyone loved it. The Paneer Wrap and the cold coffee are a deadly combo. Will definitely come back!",
   },
   {
-    quote: "Super clean, fast service, and the food is consistently amazing every single visit. Love how they keep everything fresh and vegetarian!",
-    name: "Neha Agarwal",
-    detail: "Lucknow University student",
-    store: "Indira Nagar",
+    author: {
+      name: "Neha Agarwal",
+      handle: "Lucknow University student",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    },
+    text: "Super clean, fast service, and the food is consistently amazing every visit. Love how they keep everything fresh and vegetarian!",
   },
   {
-    quote: "The atmosphere is great and the staff is so friendly. Best place to chill with friends after college — affordable and incredibly delicious.",
-    name: "Arjun Mishra",
-    detail: "College student, Lucknow",
-    store: "Antas Mall",
+    author: {
+      name: "Arjun Mishra",
+      handle: "College student, Lucknow",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    },
+    text: "The atmosphere is great and the staff is so friendly. Best place to chill with friends after college — affordable and incredibly delicious.",
   },
 ];
 
@@ -323,76 +336,12 @@ const Store = () => {
         </div>
       </div>
 
-      {/* ── Testimonials ── */}
-      <div className="padding-responsive py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto">
-
-          {/* Section header */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-12 text-center"
-          >
-            <p className="para font-primary text-red-dark font-semibold uppercase tracking-widest text-sm mb-3">
-              Happy Customers
-            </p>
-            <h2 className="heading font-sans font-bold text-4xl md:text-5xl text-gray-900 leading-tight">
-              What Our <span className="text-red-dark">Guests Say</span>
-            </h2>
-          </motion.div>
-
-          {/* Cards grid — 3 cols on large */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                whileHover={{ y: -6, transition: { duration: 0.22 } }}
-                className="flex flex-col justify-between bg-offwhite border border-offwhite-dark rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
-              >
-                {/* Stars + store tag */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, s) => (
-                      <Star key={s} size={14} className="fill-yellow-light text-yellow-light" />
-                    ))}
-                  </div>
-                  <span className="text-xs font-semibold text-gray-400 bg-white border border-offwhite-dark px-2.5 py-1 rounded-full">
-                    {t.store}
-                  </span>
-                </div>
-
-                {/* Quote */}
-                <div className="relative flex-1">
-                  <Quote size={26} className="text-red-dark/12 absolute -top-1 -left-1" />
-                  <p className="para font-primary text-gray-700 leading-relaxed pl-5 text-sm">
-                    {t.quote}
-                  </p>
-                </div>
-
-                {/* Author */}
-                <div className="mt-6 flex items-center gap-3 pt-4 border-t border-offwhite-dark">
-                  <div className="w-9 h-9 rounded-full bg-red-dark flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-sm font-sans">
-                      {t.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-sans font-semibold text-sm text-gray-900">{t.name}</p>
-                    <p className="font-primary text-gray-400 text-xs mt-0.5">{t.detail}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </div>
+      {/* ── Testimonials marquee ── */}
+      <TestimonialsSection
+        title={<>What Our <span className="text-red-dark">Guests Say</span></>}
+        description="Real reviews from real CrushBurg fans across Lucknow — see why they keep coming back."
+        testimonials={testimonials}
+      />
 
       {/* ── Bottom CTA strip ── */}
       <motion.div
