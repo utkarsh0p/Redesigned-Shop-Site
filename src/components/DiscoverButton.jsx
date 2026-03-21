@@ -23,9 +23,7 @@ export function DiscoverButton({ onSearchToggle }) {
   return (
     <div className="flex items-center gap-2 p-1.5 h-full">
       {/* Search Pill */}
-      <motion.div
-        layout
-        transition={{ type: "spring", damping: 20, stiffness: 230, mass: 1.2 }}
+      <div
         onClick={() => !isSearchExpanded && expand()}
         className={`flex items-center bg-white rounded-full shadow-md cursor-pointer h-[40px] overflow-hidden relative px-3 transition-all duration-300 ${
           isSearchExpanded ? "w-[240px]" : "w-[40px]"
@@ -70,7 +68,7 @@ export function DiscoverButton({ onSearchToggle }) {
             </motion.button>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       {/* Icons Pill — desktop only */}
       <motion.div

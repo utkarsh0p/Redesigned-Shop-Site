@@ -3,6 +3,13 @@
 export const cardBakground =
   "https://res.cloudinary.com/dff30apwl/image/upload/v1757421604/w_700,f_auto,q_auto/download_ugve8n.png";
 
+// Model
+export const modelImage =
+  "https://res.cloudinary.com/dff30apwl/image/upload/w_800,f_auto,q_auto/v1774114129/20260320_1112_Image_Generation_simple_compose_01km4w78q9eqkbqancm12akcft_o3y1ek.png";
+
+export const modelImage2 =
+  "https://res.cloudinary.com/dff30apwl/image/upload/w_1400,f_auto,q_100/v1773976564/Gemini_Generated_Image_4yolcc4yolcc4yol__1_-removebg-preview_wlqkiy.png";
+
 //main-banner
 
 export const bannerBurger =

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { navLogo } from "../constants";
-import { Home, Store, UtensilsCrossed, Phone, Info } from "lucide-react";
+import { Home, Store, UtensilsCrossed, Phone, Info, Users } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import DiscoverButton from "./DiscoverButton";
@@ -13,6 +13,7 @@ const BOTTOM_TABS = [
   { title: "Our Stores", to: "/store",    icon: Store },
   { title: "Contact",    to: "/contact",  icon: Phone },
   { title: "About Us",   to: "/aboutus",  icon: Info },
+  { title: "Franchise",  to: "/franchise", icon: Users },
 ];
 
 const tabVariants = {

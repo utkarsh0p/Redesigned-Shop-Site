@@ -44,6 +44,10 @@
 
 
 @layer base{
+  html, body {
+    @apply bg-offwhite;
+  }
+
   h1,h2,h3,h5,h6{
     @apply text-4xl md:text-6xl font-bold uppercase tracking-tight font-sans;
   }

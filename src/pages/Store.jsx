@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { MapPin, Clock, ExternalLink, Utensils, ShoppingBag, Star, ArrowRight, Phone } from "lucide-react";
 import { Timeline } from "../components/Timeline";
 import StoreGallery from "../components/StoreGallery";
-import { TestimonialsSection } from "../components/ui/testimonials-with-marquee";
+
 import { shop1, shop4 } from "../constants";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
@@ -213,57 +213,6 @@ const timelineData = [
   },
 ];
 
-/* ── Testimonials data for marquee ─────────────────────────────── */
-const testimonials = [
-  {
-    author: {
-      name: "Priya Sharma",
-      handle: "Regular at Antas Mall",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-    },
-    text: "The King Fusion Burger is absolutely mind-blowing! Never thought a veg burger could taste this good. We drive all the way from Hazratganj just for this.",
-  },
-  {
-    author: {
-      name: "Rajesh Gupta",
-      handle: "Indira Nagar local",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    },
-    text: "CrushBurg is our family's go-to every weekend. The Crunchy Tandoori Burger is my son's favourite — he refuses to eat anywhere else now!",
-  },
-  {
-    author: {
-      name: "Ananya Verma",
-      handle: "Food blogger, Lucknow",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
-    },
-    text: "Genuinely the best veg burger I've had in Lucknow. Fresh, crispy, and the sauces are on another level. The fries are addictive too!",
-  },
-  {
-    author: {
-      name: "Vikram Sinha",
-      handle: "Gomti Nagar, Lucknow",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
-    },
-    text: "Took my whole office team here for a treat and everyone loved it. The Paneer Wrap and the cold coffee are a deadly combo. Will definitely come back!",
-  },
-  {
-    author: {
-      name: "Neha Agarwal",
-      handle: "Lucknow University student",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-    },
-    text: "Super clean, fast service, and the food is consistently amazing every visit. Love how they keep everything fresh and vegetarian!",
-  },
-  {
-    author: {
-      name: "Arjun Mishra",
-      handle: "College student, Lucknow",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-    },
-    text: "The atmosphere is great and the staff is so friendly. Best place to chill with friends after college — affordable and incredibly delicious.",
-  },
-];
 
 /* ── Page ──────────────────────────────────────────────────────── */
 const Store = () => {
@@ -335,13 +284,6 @@ const Store = () => {
           <Timeline data={timelineData} />
         </div>
       </div>
-
-      {/* ── Testimonials marquee ── */}
-      <TestimonialsSection
-        title={<>What Our <span className="text-red-dark">Guests Say</span></>}
-        description="Real reviews from real CrushBurg fans across Lucknow — see why they keep coming back."
-        testimonials={testimonials}
-      />
 
       {/* ── Bottom CTA strip ── */}
       <motion.div

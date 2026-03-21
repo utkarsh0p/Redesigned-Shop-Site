@@ -26,16 +26,17 @@ export function TestimonialsSection({ title, description, testimonials, classNam
         {/* Marquee */}
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
           <div className="group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-row [--duration:40s]">
-            <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row group-hover:[animation-play-state:paused]">
-              {[...Array(4)].map((_, setIndex) =>
-                testimonials.map((testimonial, i) => (
-                  <TestimonialCard
-                    key={`${setIndex}-${i}`}
-                    {...testimonial}
-                  />
-                ))
-              )}
-            </div>
+            {[0, 1].map((strip) => (
+              <div
+                key={strip}
+                aria-hidden={strip === 1}
+                className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row group-hover:[animation-play-state:paused]"
+              >
+                {testimonials.map((testimonial, i) => (
+                  <TestimonialCard key={i} {...testimonial} />
+                ))}
+              </div>
+            ))}
           </div>
 
           {/* Fade edges */}

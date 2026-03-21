@@ -44,9 +44,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-white pt-10 pb-6 px-4 md:px-8 font-primary">
+    <footer className="w-full bg-offwhite pb-6 px-4 md:px-8 font-primary">
       {/* Taped card */}
-      <div className="relative bg-white rounded-3xl max-w-6xl mx-auto px-6 py-10">
+      <div className="relative bg-offwhite rounded-3xl max-w-6xl mx-auto px-6 pb-6">
         {/* Tape top-left */}
         <div className="hidden md:block absolute -top-5 -left-6 scale-75 origin-top-left">
           {tape}
