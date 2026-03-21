@@ -10,11 +10,14 @@ import Franchise from "./pages/Franchise.jsx";
 import TermsOfUse from "./pages/TermsOfUse.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import FAQ from "./pages/FAQ.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 function App() {
   return (
+    <ThemeProvider>
     <div>
       <Navbar />
+      <div className="md:pt-[88px] pb-20 md:pb-0 overflow-x-hidden">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/store" element={<Store />} />
@@ -26,8 +29,10 @@ function App() {
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/faq" element={<FAQ />} />
       </Routes>
+      </div>
       <Footer />
     </div>
+    </ThemeProvider>
   );
 }
 

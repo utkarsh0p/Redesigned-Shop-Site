@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* font-faces */
 
 @font-face {
@@ -23,6 +25,7 @@
 @theme {
   --font-body: primary-font, sans-serif;
   --font-heading: sub-heading-font, sans-serif;
+  --font-sans: Inter, sans-serif;
 
   /* Neutrals (Backgrounds) */
   --color-white: #ffffff;
@@ -42,11 +45,11 @@
 
 @layer base{
   h1,h2,h3,h5,h6{
-    @apply  text-xl md:text-3xl font-bold font-heading
+    @apply text-4xl md:text-6xl font-bold uppercase tracking-tight font-sans;
   }
 
   p{
-    @apply text-[14px] md:text-[16px]
+    @apply text-[14px] md:text-[16px] font-sans font-normal;
   }
 }
 
@@ -56,7 +59,7 @@
   }
 
   .heading{
-    @apply text-xl md:text-3xl font-bold font-heading;
+    @apply text-4xl md:text-6xl font-bold uppercase tracking-tight font-sans;
   }
 
   .primary-color{
@@ -71,7 +74,69 @@
   }
 
   .para{
-    @apply text-[14px] md:text-[16px];
+    @apply text-[14px] md:text-[16px] font-sans font-normal;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ── Dark mode overrides ── */
+/* Override the Tailwind theme CSS variables so every bg-white/bg-offwhite
+   class automatically picks up the dark palette — no per-component changes needed */
+.dark {
+  --color-white: #1e293b;          /* cards, navbar, footer surfaces */
+  --color-offwhite: #0f172a;       /* page background */
+  --color-offwhite-dark: #334155;  /* borders, dividers */
+  color-scheme: dark;
+}
+
+/* Global dark text — elements that don't carry an explicit text class inherit this */
+.dark body {
+  color: #f1f5f9;
+}
+
+/* Explicit text-black overrides (headings, labels that hardcode text-black) */
+.dark .text-black,
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #f1f5f9;
+}
+
+.dark p {
+  color: #cbd5e1;
+}
+
+/* Muted / secondary text */
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700 {
+  color: #94a3b8;
+}
+
+/* Input fields */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border-color: #334155;
+}
+
+/* card-shadow utility uses @apply bg-white — already handled by --color-white override above */
 

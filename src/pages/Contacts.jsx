@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapPin, Phone, Mail, User, MessageSquare } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import SlideButton from "../components/SlideButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,7 @@ const Contact = () => {
     name: "",
     email: "",
     phone: "",
+    subject: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ const Contact = () => {
     const { name, value } = e.target;
 
     if (name === "phone") {
-      if (!/^\d*$/.test(value)) return; // allow only numbers
+      if (!/^\d*$/.test(value)) return;
     }
 
     setFormData({ ...formData, [name]: value });
@@ -43,7 +44,7 @@ const Contact = () => {
       );
 
       toast.success("✅ Message sent successfully!");
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (err) {
       toast.error("❌ Failed to send message. Try again later.");
       console.error(err);
@@ -53,7 +54,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12 space-y-20">
+    <section className="bg-offwhite py-16 md:py-24 padding-responsive">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -65,128 +66,167 @@ const Contact = () => {
         theme="colored"
       />
 
-      {/* Heading */}
-      <div className="text-center mb-12">
-        <h2 className="heading text-red-dark font-heading font-bold text-3xl md:text-4xl mb-4">
-          Contact Us
-        </h2>
-        <p className="para font-sub text-gray-700 max-w-2xl mx-auto leading-relaxed text-lg">
-          Have a question, feedback, or just want to say hello? Reach out
-          through the form or our contact details below. We’d love to hear from
-          you!
-        </p>
-      </div>
+      <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
 
-      {/* Info Cards */}
-      <div className="grid md:grid-cols-3 gap-6">
-        <InfoCard
-          Icon={MapPin}
-          title="Address"
-          text="Crown Mall, Lucknow, Uttar Pradesh, India"
-        />
-        <InfoCard Icon={Phone} title="Phone" text="+91 7619910103" />
-        <InfoCard Icon={Mail} title="Email" text="connect@crushburg.com" />
-      </div>
-
-      {/* Contact Form */}
-      <div className="bg-white shadow-md rounded-2xl p-8 w-full max-w-2xl mx-auto">
-        <h2 className="heading text-red-dark font-heading font-semibold mb-4 text-center text-2xl md:text-3xl">
-          Send Us a Message
-        </h2>
-        <p className="para text-gray-700 mb-6 font-sub leading-relaxed text-center text-lg">
-          Fill out the form below and we’ll get back to you as soon as possible.
-        </p>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <InputField
-            Icon={User}
-            name="name"
-            placeholder="Name *"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <InputField
-            Icon={Mail}
-            name="email"
-            placeholder="Email Address *"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <InputField
-            Icon={Phone}
-            name="phone"
-            placeholder="Mobile No. *"
-            maxLength={10}
-            value={formData.phone}
-            onChange={handleChange}
-          />
-          <TextAreaField
-            Icon={MessageSquare}
-            name="message"
-            placeholder="Enter Your Message Here"
-            value={formData.message}
-            onChange={handleChange}
-          />
-
-          <div className="flex justify-center mt-4">
-            <SlideButton
-              value={loading ? "Sending..." : "Send Message"}
-              disabled={loading}
-            />
+        {/* Left — Info */}
+        <div className="flex flex-col justify-between gap-10 max-w-sm mx-auto lg:mx-0 w-full">
+          <div className="text-center lg:text-left">
+            <h1 className="heading font-heading font-bold text-3xl md:text-5xl text-red-dark mb-3">
+              Contact Us
+            </h1>
+            <p className="para font-primary text-gray-700 leading-relaxed">
+              We are available for questions, feedback, or collaboration
+              opportunities. Let us know how we can help!
+            </p>
           </div>
-        </form>
+
+          <div className="mx-auto lg:mx-0 w-full">
+            <h3 className="heading font-heading font-semibold text-xl md:text-2xl mb-6 text-center lg:text-left">
+              Contact Details
+            </h3>
+            <div className="flex flex-col gap-4">
+              <ContactDetail
+                Icon={MapPin}
+                label="Address"
+                value="Crown Mall, Lucknow, Uttar Pradesh, India"
+              />
+              <ContactDetail
+                Icon={Phone}
+                label="Phone"
+                value="+91 7619910103"
+                href="tel:+917619910103"
+              />
+              <ContactDetail
+                Icon={Mail}
+                label="Email"
+                value="connect@crushburg.com"
+                href="mailto:connect@crushburg.com"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Right — Form */}
+        <div className="mx-auto w-full max-w-screen-md bg-white rounded-2xl border border-offwhite-dark shadow-md p-8 md:p-10">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <FormField
+                label="Name"
+                id="name"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <FormField
+                label="Phone"
+                id="phone"
+                name="phone"
+                placeholder="10-digit Mobile No."
+                value={formData.phone}
+                onChange={handleChange}
+                maxLength={10}
+                required
+              />
+            </div>
+
+            <FormField
+              label="Email"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="your@email.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+
+            <FormField
+              label="Subject"
+              id="subject"
+              name="subject"
+              placeholder="How can we help?"
+              value={formData.subject}
+              onChange={handleChange}
+              required
+            />
+
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="message"
+                className="para font-primary font-medium text-gray-700"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Type your message here."
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className="w-full rounded-xl border border-offwhite-dark bg-offwhite px-4 py-2.5 para font-primary text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-dark resize-none transition"
+              />
+            </div>
+
+            <div className="flex justify-center mt-2">
+              <SlideButton
+                value={loading ? "Sending..." : "Send Message"}
+                disabled={loading}
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );
 };
 
-// Reusable Info Card
-const InfoCard = ({ Icon, title, text }) => (
-  <div className="bg-offwhite p-8 text-center shadow-md rounded-2xl hover:shadow-lg transition">
-    <Icon className="mx-auto mb-4 text-red-dark" size={36} />
-    <h3 className="heading text-lg font-heading font-semibold mb-2">{title}</h3>
-    <p className="para text-gray-700 font-sub leading-relaxed">{text}</p>
+const ContactDetail = ({ Icon, label, value, href }) => (
+  <div className="flex items-start gap-3">
+    <div className="mt-0.5 flex-shrink-0 bg-red-dark/10 p-2 rounded-full">
+      <Icon className="text-red-dark" size={18} />
+    </div>
+    <div>
+      <span className="para font-primary font-semibold text-gray-800">{label}: </span>
+      {href ? (
+        <a href={href} className="para font-primary text-gray-600 underline underline-offset-2 hover:text-red-dark transition">
+          {value}
+        </a>
+      ) : (
+        <span className="para font-primary text-gray-600">{value}</span>
+      )}
+    </div>
   </div>
 );
 
-// Reusable Input Field
-const InputField = ({
-  Icon,
+const FormField = ({
+  label,
+  id,
   name,
   placeholder,
   type = "text",
   value,
   onChange,
   maxLength,
+  required,
 }) => (
-  <div className="flex items-center border-b pb-2">
-    <Icon className="text-gray-500 mr-3" size={20} />
+  <div className="flex flex-col gap-1.5 w-full">
+    <label htmlFor={id} className="para font-primary font-medium text-gray-700">
+      {label}
+    </label>
     <input
       type={type}
+      id={id}
       name={name}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      required
+      required={required}
       maxLength={maxLength}
-      className="w-full focus:outline-none bg-transparent"
-    />
-  </div>
-);
-
-// Reusable TextArea
-const TextAreaField = ({ Icon, name, placeholder, value, onChange }) => (
-  <div className="flex items-start border-b pb-2">
-    <Icon className="text-gray-500 mr-3 mt-2" size={20} />
-    <textarea
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      required
-      rows="4"
-      className="w-full focus:outline-none bg-transparent resize-none"
+      className="w-full rounded-xl border border-offwhite-dark bg-offwhite px-4 py-2.5 para font-primary text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-dark transition"
     />
   </div>
 );

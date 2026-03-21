@@ -1,141 +1,159 @@
 import React from "react";
 import {
-  heroBanner,
-  heroBannerA,
-  shop,
-  shop1,
-  shop2,
-  shop3,
-  shop4,
+  bannerBurger,
   shopAiImage,
   shopAiImage2,
+  kingFusionBurger,
+  paneerWrap,
+  royalSandwich,
+  oreoShake,
+  hazelnutShake,
 } from "../constants";
-import ProductCarousel from "../components/ProductCarousel.jsx";
+import { MarqueeAnimation } from "../components/MarqueeAnimation.jsx";
+import CircularMenuCard from "../components/CircularMenuCard.jsx";
+import StoreGallery from "../components/StoreGallery.jsx";
+import MinimalistHero from "../components/MinimalistHero.jsx";
+import GrillToYouSection from "../components/GrillToYouSection.jsx";
+import { ContainerScroll } from "../components/ContainerScroll.jsx";
 import { useNavigate } from "react-router-dom";
+
+const featuredItems = [
+  {
+    src: kingFusionBurger,
+    name: "Burgers",
+    category: "Starting ₹39",
+    badge: "10 varieties",
+    description:
+      "From light and simple to stacked and indulgent — our burgers are built with crispy patties, melted cheese, fresh veggies and bold house sauces. Every bite is the kind of flavour that makes you close your eyes for a second.",
+  },
+  {
+    src: paneerWrap,
+    name: "Wraps",
+    category: "Starting ₹79",
+    badge: "3 varieties",
+    description:
+      "Soft tortillas loaded with smoky spiced fillings, crunchy veggies and tangy sauces — all rolled up into a handheld meal that is filling, flavourful and absolutely impossible to put down.",
+  },
+  {
+    src: royalSandwich,
+    name: "Sandwiches",
+    category: "Starting ₹79",
+    badge: "4 varieties",
+    description:
+      "Golden-toasted on the outside, generously stuffed on the inside — our sandwiches bring together melted cheese, seasoned veggies and zesty chutney in every warm, satisfying bite.",
+  },
+  {
+    src: oreoShake,
+    name: "Shakes",
+    category: "Starting ₹99",
+    badge: "5 varieties",
+    description:
+      "Thick, creamy and impossibly good — our shakes are blended to perfection in flavours like Oreo, Mango, Chocolate and more. The sweetest way to finish off your CrushBurg experience.",
+  },
+  {
+    src: hazelnutShake,
+    name: "Cold Coffee",
+    category: "Starting ₹99",
+    badge: "4 varieties",
+    description:
+      "Chilled, frothy and richly aromatic — our cold coffees blend bold espresso with flavours like hazelnut and vanilla for a smooth, refreshing sip that is as satisfying as the meal itself.",
+  },
+];
 
 const HomePage = () => {
   const navigate = useNavigate();
   return (
     <div className="homepage primary-color">
-      <div
-        className="banner w-[100%] h-[20vh] md:h-[50vh] lg:h-[70vh] bg-red-dark bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroBannerA})` }}
-      ></div>
+      <MinimalistHero imageSrc={bannerBurger} />
 
-      {/* section one */}
-      <section className="padding-responsive flex flex-col md:flex-row h-auto mb-18">
-        {/* left div */}
-        <div className="w-[100%] md:w-[49%] h-auto">
-          <h1 className="text-xl md:text-3xl text-black font-bold font-heading mt-8 mb-4">
-            Welcome to CrushBurg
-          </h1>
-          <p>
-            At CrushBurg, every bite is built to impress. From flame-kissed
-            burgers and smoky chicken wraps to gooey grilled sandwiches and
-            crunchy sides, our menu balances comfort with bold flavor.
-          </p>
-          <div>
-            <h2 className="text-lg md:text-xl text-black font-medium font-heading my-4">
-              Why People Love Us:
-            </h2>
-            <ul className="list-disc list-inside space-y-3 text-[14px] md:text-[16px]">
-              <li>Juicy burgers stacked with fresh toppings</li>
-              <li>Flavor-packed wraps and grilled sandwiches</li>
-              <li>Perfect hangout spot for friends, late-night bites</li>
-              <li>Quality ingredients sourced with care</li>
-              <li>Exciting events & offers.</li>
-            </ul>
-          </div>
-        </div>
-        {/* right div */}
-        <div className="w-full md:w-[49%] h-[40vh] md:h-[70vh]">
+      {/* Marquee */}
+      <div className="flex flex-col gap-0 py-3 bg-offwhite overflow-hidden">
+        <MarqueeAnimation
+          direction="left"
+          baseVelocity={0.5}
+          className="text-white bg-red-dark py-2.5 tracking-widest"
+        >
+          BURGERS &nbsp;•&nbsp; WRAPS &nbsp;•&nbsp; SANDWICHES &nbsp;•&nbsp; FRIES &nbsp;•&nbsp; BEVERAGES &nbsp;•&nbsp;
+        </MarqueeAnimation>
+        <MarqueeAnimation
+          direction="right"
+          baseVelocity={0.5}
+          className="text-black bg-yellow-light py-2.5 tracking-widest"
+        >
+          CRUSHBURG &nbsp;•&nbsp; 100% VEG &nbsp;•&nbsp; FRESH DAILY &nbsp;•&nbsp; BOLD FLAVORS &nbsp;•&nbsp; LUCKNOW &nbsp;•&nbsp;
+        </MarqueeAnimation>
+      </div>
+
+      {/* section one — welcome with scroll animation */}
+      <section className="bg-offwhite overflow-hidden">
+        <ContainerScroll
+          titleComponent={
+            <div className="padding-responsive">
+              <p className="para font-primary text-red-dark font-semibold uppercase tracking-widest text-sm mb-3">
+                Lucknow's Favourite
+              </p>
+              <h1 className="heading font-sans font-bold text-4xl md:text-6xl text-gray-900 uppercase tracking-tight leading-none mb-4">
+                Welcome to <span className="text-red-dark">CrushBurg</span>
+              </h1>
+              <p className="para font-primary text-gray-600 max-w-2xl mx-auto mb-6">
+                Every bite is built to impress. From crispy burgers and smoky
+                wraps to grilled sandwiches and bold sides — comfort food done
+                right.
+              </p>
+              <ul className="flex flex-wrap justify-center gap-3 text-sm font-semibold mb-10 md:mb-16">
+                {["100% Veg", "Fresh Daily", "Bold Flavors", "10+ Varieties"].map(
+                  (tag) => (
+                    <li
+                      key={tag}
+                      className="bg-yellow-light text-black px-4 py-1 rounded-full"
+                    >
+                      {tag}
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          }
+        >
           <img
             src={shopAiImage}
-            className="w-full h-full object-cover my-8"
-            alt="Image-shop"
+            alt="CrushBurg store"
+            className="w-full h-full object-contain md:object-cover object-center rounded-2xl"
+            draggable={false}
           />
-        </div>
+        </ContainerScroll>
       </section>
 
       {/* menu section */}
-      <section className="w-full padding-responsive py-8 bg-offwhite">
-        <div className="flex flex-col items-center mb-8">
-          <h1 className="text-xl md:text-3xl text-black font-bold font-heading">
-            Our Menu
-          </h1>
-          <p>A menu crafted to satisfy every craving</p>
-        </div>
-        <ProductCarousel />
-      </section>
-
-      {/* shores section */}
-      <section className="w-full pl-3 pr-3 py-8">
-        <div className="flex flex-col items-center mb-8">
-          <h1 className="heading text-black font-bold font-heading">
-            Our Stores
-          </h1>
-          <p>Closer than you think</p>
-        </div>
-        <div className="grid grid-cols-[repeat(2,minmax(45vw,1fr))] md:grid-cols-[repeat(3,minmax(0,1fr))] gap-4">
-          <div className="bg-red-600 h-auto md:hidden">
-            <img
-              src={shop4}
-              alt="shop-picture"
-              className="w-full h-full object-cover"
-            />
+      <section className="w-full padding-responsive py-14 bg-offwhite">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 max-w-4xl mx-auto">
+          <div>
+            <p className="para font-primary text-red-dark font-semibold uppercase tracking-widest text-sm mb-2">
+              What We Serve
+            </p>
+            <h1 className="heading font-heading font-bold text-3xl md:text-5xl text-gray-900">
+              Our <span className="text-red-dark">Menu</span>
+            </h1>
           </div>
-          <div className="bg-red-600 h-auto">
-            <img
-              src={shop2}
-              alt="shop-picture"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="bg-red-600 h-auto">
-            <img
-              src={shop1}
-              alt="shop-picture"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="bg-red-600 h-auto">
-            <img
-              src={shop3}
-              alt="shop-picture"
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </div>
-        <div className="flex justify-center items-center">
           <button
-            className="bg-red-dark text-white px-4 py-2 rounded-full mt-8 cursor-pointer para"
-            onClick={() => navigate("/store")}
+            onClick={() => navigate("/menu")}
+            className="self-start md:self-end bg-red-dark text-white px-6 py-2.5 rounded-full font-semibold para font-primary hover:bg-red-light transition-colors duration-200 shadow-md whitespace-nowrap"
           >
-            Locate nearby Stores
+            View Full Menu →
           </button>
         </div>
+
+        <CircularMenuCard items={featuredItems} autoplay={true} />
+      </section>
+
+      {/* stores section */}
+      <section className="w-full">
+        <StoreGallery onLocateClick={() => navigate("/store")} />
 
         <div className="mt-8 md:mt-24">
           <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1  overflow-hidden md:h-[80vh]">
             {/* Left Text Section */}
-            <div className="bg-offwhite p-10 primary-color">
-              <h1 className="mb-4 text-black text-xl md:text-3xl font-bold">
-                From Our Grill to Your Plate
-              </h1>
-              <p className="mb-6">
-                Join the Crushburg family and be a part of the fastest-growing
-                burger & wraps brand.
-              </p>
-              <ul className="list-disc list-inside para space-y-2">
-                <li>Freshly grilled burgers and wraps</li>
-                <li>Easy franchise setup & full support</li>
-                <li>Proven business growth model</li>
-                <li>Strong marketing & brand presence</li>
-              </ul>
-              <button className="mt-6 bg-red-dark py-2 text-white px-6 md:py-3 rounded-full font-semibold w-fit cursor-pointer para">
-                Apply For A Franchise
-              </button>
-            </div>
+            <GrillToYouSection />
             {/* Right Image Section */}
             <div className="relative">
               <img
