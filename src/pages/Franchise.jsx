@@ -219,7 +219,7 @@ const Franchise = () => {
       />
 
       {/* ── Hero ── */}
-      <section className="relative z-10 padding-responsive pt-20 pb-14 md:pt-28 md:pb-20">
+      <section className="relative z-10 padding-responsive pt-28 pb-14 md:pt-28 md:pb-20">
         <div className="max-w-4xl mx-auto text-center">
           <motion.span
             className="inline-flex items-center gap-2 text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-4"

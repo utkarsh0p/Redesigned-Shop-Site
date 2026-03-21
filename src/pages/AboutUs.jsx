@@ -224,7 +224,7 @@ const AboutUs = () => {
     <section
       id="about-section"
       ref={sectionRef}
-      className="w-full py-24 px-4 bg-gradient-to-b from-offwhite to-white text-gray-900 overflow-hidden relative"
+      className="w-full pt-28 pb-24 px-4 md:py-24 bg-gradient-to-b from-offwhite to-white text-gray-900 overflow-hidden relative"
     >
       {/* Decorative background blobs */}
       <motion.div
@@ -255,16 +255,16 @@ const AboutUs = () => {
         {/* Header */}
         <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
           <motion.span
-            className="text-red-dark font-medium mb-2 flex items-center gap-2 text-sm tracking-widest uppercase"
+            className="inline-flex items-center gap-2 text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-4"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Zap className="w-4 h-4" />
+            <Zap className="w-3.5 h-3.5" />
             Discover Our Story
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center font-heading text-red-dark">
-            About CrushBurg
+          <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight mb-4 text-center">
+            About <span className="text-red-dark">CrushBurg</span>
           </h2>
           <motion.div
             className="h-1 bg-red-dark rounded-full"

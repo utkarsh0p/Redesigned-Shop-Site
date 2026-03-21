@@ -49,7 +49,7 @@ const Photo = ({ src, alt, direction, width, height }) => {
       draggable={false}
       tabIndex={0}
     >
-      <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-lg border-4 border-white">
+      <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-lg border-[3px] border-red-dark">
         <img
           src={src}
           alt={alt}

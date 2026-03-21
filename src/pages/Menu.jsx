@@ -333,7 +333,7 @@ const Menu = () => {
       />
 
       {/* ── Hero ── */}
-      <section className="relative z-10 padding-responsive pt-16 pb-10 md:pt-20 md:pb-12 text-center">
+      <section className="relative z-10 padding-responsive pt-28 pb-10 md:pt-20 md:pb-12 text-center">
         <motion.p
           className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-3"
           initial={{ opacity: 0, y: -10 }}

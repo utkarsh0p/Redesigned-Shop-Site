@@ -54,7 +54,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-offwhite py-16 md:py-24 padding-responsive">
+    <section className="bg-offwhite pt-28 pb-16 md:py-24 padding-responsive">
       <ToastContainer
         position="top-right"
         autoClose={3000}

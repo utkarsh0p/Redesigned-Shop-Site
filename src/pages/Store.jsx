@@ -277,7 +277,7 @@ const Store = () => {
     <div className="bg-offwhite">
 
       {/* ── Hero ── */}
-      <div className="padding-responsive py-20 md:py-32 relative overflow-hidden">
+      <div className="padding-responsive pt-28 pb-20 md:py-32 relative overflow-hidden">
         {/* Decorative bg blobs */}
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-red-dark/5 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-yellow-light/15 translate-y-1/2 -translate-x-1/2 pointer-events-none" />

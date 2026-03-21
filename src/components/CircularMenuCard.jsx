@@ -11,8 +11,8 @@ import { motion, AnimatePresence } from "motion/react";
 function calculateGap(width) {
   const minWidth = 1024;
   const maxWidth = 1456;
-  const minGap = 60;
-  const maxGap = 86;
+  const minGap = 68;
+  const maxGap = 94;
   if (width <= minWidth) return minGap;
   if (width >= maxWidth) return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
   return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
@@ -117,7 +117,7 @@ const CircularMenuCard = ({ items, autoplay = true }) => {
               key={item.src}
               src={item.src}
               alt={item.name}
-              className="absolute w-full h-full object-cover rounded-3xl shadow-2xl"
+              className="absolute w-full h-full object-cover rounded-3xl shadow-2xl border-[3px] border-red-dark"
               style={getImageStyle(index)}
             />
           ))}

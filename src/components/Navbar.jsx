@@ -33,6 +33,7 @@ const springTransition = { delay: 0.05, type: "spring", bounce: 0, duration: 0.5
 
 const Navbar = () => {
   const [selectedTab, setSelectedTab] = useState(null);
+  const [searchOpen, setSearchOpen] = useState(false);
   const dockRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,8 +71,8 @@ const Navbar = () => {
           <img src={navLogo} alt="logo" className="w-full h-auto object-contain" />
         </div>
         <div className="flex items-center gap-3">
-          <SkyToggle />
-          <DiscoverButton />
+          {!searchOpen && <SkyToggle />}
+          <DiscoverButton onSearchToggle={setSearchOpen} />
         </div>
       </nav>
 
