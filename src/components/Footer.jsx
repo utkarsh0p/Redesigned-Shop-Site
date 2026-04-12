@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Twitter, Users, Phone, Mail } from "lucide-react";
 import { logoTwo } from "../constants";
 
-const CONTACT_NUMBER = "+917619910103";
-const CONTACT_EMAIL = "connect@crushburg.com";
+const CONTACT_NUMBER = "+919511450700";
+const CONTACT_EMAIL = "hello@crushburg.com";
 
 const tape = (
   <svg xmlns="http://www.w3.org/2000/svg" width="95" height="80" viewBox="0 0 95 80" fill="none">

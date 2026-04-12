@@ -96,10 +96,8 @@ const MinimalistHero = ({ imageSrc }) => {
           transition={{ duration: 0.6, delay: 1 }}
           className="z-20 order-3 flex items-center justify-center text-center md:justify-end md:pl-8"
         >
-          <h1 className="text-6xl font-extrabold text-black uppercase tracking-tight font-sans leading-none md:text-7xl lg:text-8xl">
-            CRUSH
-            <br />
-            <span className="text-red-dark">BURG.</span>
+          <h1 className="text-5xl font-extrabold text-black uppercase tracking-tight font-sans leading-none md:text-4xl lg:text-5xl whitespace-nowrap">
+            CRUSH<span className="text-red-dark">BURG</span>
           </h1>
         </motion.div>
       </div>

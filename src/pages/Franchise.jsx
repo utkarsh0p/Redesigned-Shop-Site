@@ -24,74 +24,77 @@ import {
 import { motion, useInView, useSpring, useTransform, useScroll } from "motion/react";
 import { MarqueeAnimation } from "../components/MarqueeAnimation.jsx";
 import { crusburgBrandingCard } from "../constants";
+import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
-const WHATSAPP_NUMBER = "+917619910103";
+const WHATSAPP_NUMBER = "+919511450700";
 const MANUAL_LINK =
   "https://drive.google.com/file/d/1aUAn9DMq6G1CiqbuQyeLF6q-KbaQb6g3/view?usp=sharing";
 
 const pillars = [
   {
+    icon: Handshake,
+    title: "FICO Model",
+    desc: "Franchisor manages all operations — you invest and earn as a profit partner, stress-free.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Guaranteed Returns",
+    desc: "Minimum guaranteed returns based on your investment — you earn even in slow months.",
+  },
+  {
     icon: Target,
-    title: "Mass-Premium Pricing",
-    desc: "Gourmet taste at youth budgets — bold flavors starting from ₹39.",
+    title: "One-Time Investment",
+    desc: "No recurring franchise fees. One investment, five-year tenure, structured returns.",
   },
   {
-    icon: Globe,
-    title: "Multi-Channel Engine",
-    desc: "D2C app + Swiggy/Zomato + café and cafeteria outlets working together.",
+    icon: Award,
+    title: "Award-Winning Brand",
+    desc: "IGA Rising Star Brand 2025 with 98% success ratio. Featured in Icons of India magazine.",
   },
   {
-    icon: MapPin,
-    title: "Hyperlocal Expansion",
-    desc: "Rollouts near colleges, IT parks & malls with central kitchen support.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Menu Innovation",
-    desc: "AI-driven feedback to continuously scale only the bestsellers.",
-  },
-  {
-    icon: Users,
-    title: "Community-First DNA",
-    desc: "Meme marketing, CrushCoins, campus clubs & youth-first activations.",
+    icon: CheckCircle,
+    title: "DPIIT Recognized",
+    desc: "Government-certified by DPIIT — a trusted, credible brand you can invest in with confidence.",
   },
 ];
 
 const investmentModels = [
   {
     title: "Café Model",
-    subtitle: "300 sq.ft.",
+    subtitle: "500 sq.ft. · Mall Food Courts",
     featured: false,
     items: [
-      { label: "Brand Fees (5 yrs)", value: "₹5,00,000" },
-      { label: "Total Investment", value: "₹25,50,000" },
-      { label: "Estimated ROI", value: "~71.1%" },
-      { label: "Payback Period", value: "16.8 months" },
+      { label: "Total Investment", value: "₹25,00,000" },
+      { label: "Franchise Fee", value: "₹5,00,000 + GST" },
+      { label: "Tenure", value: "5 Years" },
+      { label: "Min. Guaranteed Returns", value: "1.5% of invest. OR 7% gross" },
     ],
   },
   {
     title: "Cafeteria Model",
-    subtitle: "600 sq.ft.",
+    subtitle: "1500 sq.ft. · Malls & IT Parks",
     featured: true,
     badge: "Most Popular",
     items: [
-      { label: "Brand Fees (5 yrs)", value: "₹5,00,000" },
-      { label: "Total Investment", value: "₹36,75,000" },
-      { label: "Estimated ROI", value: "~76.1%" },
-      { label: "Payback Period", value: "15.7 months" },
+      { label: "Total Investment", value: "₹50,00,000" },
+      { label: "Franchise Fee", value: "₹10,00,000 + GST" },
+      { label: "Tenure", value: "5 Years" },
+      { label: "Min. Guaranteed Returns", value: "2% of invest. OR 10% gross" },
     ],
   },
   {
-    title: "FICO Model",
-    subtitle: "Fully Company Operated",
+    title: "Drive Cafeteria",
+    subtitle: "2500 sq.ft. · Highways & Prime Roads",
     featured: false,
     items: [
-      { label: "Revenue Share", value: "1% of invest. OR 15% gross" },
-      { label: "Operations", value: "Company managed" },
-      { label: "Inventory", value: "Partner funded (first time)" },
-      { label: "Your Role", value: "Investor only" },
+      { label: "Total Investment", value: "₹1,00,00,000" },
+      { label: "Franchise Fee", value: "₹15,00,000 + GST" },
+      { label: "Tenure", value: "5 Years" },
+      { label: "Min. Guaranteed Returns", value: "2% of invest. OR 15% gross" },
     ],
   },
 ];
@@ -124,17 +127,17 @@ const steps = [
 ];
 
 const team = [
-  { name: "Suraj Kumar Rai", role: "Chief Executive Officer", initials: "SK" },
-  { name: "Dhaneesh K Dixit", role: "Chief Finance Officer", initials: "DK" },
-  { name: "Avinash Shukla", role: "Chief Operations Officer", initials: "AS" },
-  { name: "Vikash Rai", role: "Chief Marketing Officer", initials: "VR" },
+  { name: "Suraj Kumar Rai", role: "Chairman & Managing Director", initials: "SK" },
+  { name: "Vikash Rai", role: "Chief Executive Officer", initials: "VR" },
+  { name: "Karan Agrawal", role: "Head Chef & Quality Lead", initials: "KA" },
+  { name: "Vivek Singh", role: "Chief Operating Officer", initials: "VS" },
 ];
 
 const stats = [
-  { value: 19, suffix: "+", label: "Outlets & Growing" },
+  { value: 18, suffix: "+", label: "Outlets & Growing" },
   { value: 25, suffix: "+", label: "Franchise Partners" },
-  { value: 4, suffix: "", label: "Years of Passion" },
-  { value: 76, suffix: "%", label: "Best ROI (Cafeteria)" },
+  { value: 2, suffix: "", label: "Cities Operational" },
+  { value: 100, suffix: "", label: "Outlets Target by 2026" },
 ];
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -187,6 +190,137 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+// ── Franchise Inquiry Form ────────────────────────────────────────────────────
+
+const FranchiseForm = () => {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", city: "", model: "", message: "" });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "phone" && !/^\d*$/.test(value)) return;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (form.phone.length !== 10) {
+      toast.error("Mobile number must be exactly 10 digits");
+      return;
+    }
+    setLoading(true);
+    try {
+      await emailjs.send(
+        "service_c81x8y8",
+        "template_5o6opax",
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: `Franchise Inquiry — ${form.model || "General"} | ${form.city}`,
+          message: `City: ${form.city}\nPreferred Model: ${form.model || "Not specified"}\n\n${form.message}`,
+        },
+        "-cfQhhFo2N8W-jub7"
+      );
+      toast.success("Enquiry sent! Our team will contact you shortly.");
+      setForm({ name: "", email: "", phone: "", city: "", model: "", message: "" });
+    } catch {
+      toast.error("Failed to send. Please try WhatsApp or email directly.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const inputClass = "w-full rounded-xl border border-offwhite-dark bg-offwhite px-4 py-2.5 text-sm font-primary text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-dark transition";
+  const labelClass = "block text-sm font-medium font-primary text-gray-700 mb-1.5";
+
+  return (
+    <section className="relative z-10 padding-responsive py-16 md:py-20">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            Get Started
+          </p>
+          <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
+            Send an <span className="text-red-dark">Enquiry</span>
+          </h2>
+          <p className="text-gray-500 text-sm max-w-lg mx-auto mt-3">
+            Fill in your details and our franchise team will reach out within 24 hours.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="bg-white rounded-2xl border border-offwhite-dark shadow-sm p-8 md:p-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClass}>Full Name</label>
+                <input name="name" placeholder="Your Name" value={form.name} onChange={handleChange} required className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Phone</label>
+                <input name="phone" placeholder="10-digit Mobile No." value={form.phone} onChange={handleChange} maxLength={10} required className={inputClass} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClass}>Email</label>
+                <input name="email" type="email" placeholder="your@email.com" value={form.email} onChange={handleChange} required className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>City (Where you want to open)</label>
+                <input name="city" placeholder="e.g. Lucknow, Bengaluru..." value={form.city} onChange={handleChange} required className={inputClass} />
+              </div>
+            </div>
+
+            <div>
+              <label className={labelClass}>Preferred Model</label>
+              <select name="model" value={form.model} onChange={handleChange} className={inputClass}>
+                <option value="">Select a model</option>
+                <option value="Café Model (500 sq.ft. — ₹25L)">Café Model (500 sq.ft. — ₹25L)</option>
+                <option value="Cafeteria Model (1500 sq.ft. — ₹50L)">Cafeteria Model (1500 sq.ft. — ₹50L)</option>
+                <option value="Drive Cafeteria (2500 sq.ft. — ₹1Cr)">Drive Cafeteria (2500 sq.ft. — ₹1Cr)</option>
+                <option value="Not sure yet">Not sure yet — need guidance</option>
+              </select>
+            </div>
+
+            <div>
+              <label className={labelClass}>Message (Optional)</label>
+              <textarea name="message" placeholder="Any specific questions or requirements..." value={form.message} onChange={handleChange} rows={4} className={`${inputClass} resize-none`} />
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 pt-1">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-red-dark hover:bg-red-light text-white px-8 py-3 rounded-full font-semibold text-sm shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loading ? "Sending..." : <><ArrowRight className="w-4 h-4" /> Submit Enquiry</>}
+              </button>
+              <p className="text-gray-400 text-[12px] text-center sm:text-left">
+                Or reach us directly at{" "}
+                <a href="mailto:hello@crushburg.com" className="text-red-dark hover:underline">hello@crushburg.com</a>
+              </p>
+            </div>
+          </form>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 // ── Main Page ─────────────────────────────────────────────────────────────────
 
 const Franchise = () => {
@@ -197,6 +331,7 @@ const Franchise = () => {
 
   return (
     <div ref={pageRef} className="min-h-screen bg-offwhite overflow-x-hidden">
+      <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover theme="colored" />
 
       {/* ── Decorative blobs ── */}
       <motion.div
@@ -242,14 +377,23 @@ const Franchise = () => {
           </motion.h1>
 
           <motion.p
-            className="para text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed"
+            className="para text-gray-600 max-w-2xl mx-auto mb-4 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            India's fastest-growing youth-first QSR chain — redefining fast food with
-            Indian fusion flavors, smart pricing, and a community-driven brand.
+            India's fastest-growing QSR burger brand — delivering consistent quality,
+            guaranteed returns, and a fully managed franchise model.
             Join us and turn entrepreneurship into your best investment.
+          </motion.p>
+
+          <motion.p
+            className="text-[12px] text-gray-400 font-medium mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.38 }}
+          >
+            Operated by <span className="text-gray-600 font-semibold">Crushburg Private Limited</span> · Backed by <span className="text-gray-600 font-semibold">RAI Group</span> · DPIIT Recognized
           </motion.p>
 
           <motion.div
@@ -286,7 +430,7 @@ const Franchise = () => {
           FRANCHISE &nbsp;•&nbsp; PARTNER WITH US &nbsp;•&nbsp; GROW YOUR BUSINESS &nbsp;•&nbsp; CRUSHBURG &nbsp;•&nbsp;
         </MarqueeAnimation>
         <MarqueeAnimation direction="right" baseVelocity={0.45} className="text-black bg-yellow-light py-2 tracking-widest">
-          ₹25L INVESTMENT &nbsp;•&nbsp; 76% ROI &nbsp;•&nbsp; FULL SUPPORT &nbsp;•&nbsp; 15 MONTH PAYBACK &nbsp;•&nbsp;
+          ₹25L INVESTMENT &nbsp;•&nbsp; GUARANTEED RETURNS &nbsp;•&nbsp; FULL SUPPORT &nbsp;•&nbsp; FICO MODEL &nbsp;•&nbsp; DPIIT RECOGNIZED &nbsp;•&nbsp;
         </MarqueeAnimation>
       </div>
 
@@ -354,8 +498,92 @@ const Franchise = () => {
         </div>
       </section>
 
-      {/* ── Investment Models ── */}
+      {/* ── FICO Model Explainer ── */}
       <section className="relative z-10 padding-responsive py-16 md:py-20 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+              How It Works
+            </p>
+            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
+              The <span className="text-red-dark">FICO Model</span>
+            </h2>
+            <p className="text-gray-500 text-sm max-w-xl mx-auto mt-3 leading-relaxed">
+              FICO (Franchisor Invested Company Operated) is our unique franchise structure — you invest once, we run the business, and you earn guaranteed returns.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            {/* Flow diagram */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0 items-center">
+              {[
+                {
+                  step: "01",
+                  title: "You Invest",
+                  desc: "One-time investment. No recurring fees. You choose your model — Café, Cafeteria, or Drive Cafeteria.",
+                  color: "bg-offwhite border-offwhite-dark",
+                  textColor: "text-gray-900",
+                },
+                {
+                  step: "02",
+                  title: "We Operate",
+                  desc: "CrushBurg's team handles staffing, training, supply chain, quality control, and daily operations entirely.",
+                  color: "bg-red-dark",
+                  textColor: "text-white",
+                  descColor: "text-white/75",
+                },
+                {
+                  step: "03",
+                  title: "You Earn",
+                  desc: "Receive guaranteed minimum returns every month, based on your investment — regardless of sales volume.",
+                  color: "bg-offwhite border-offwhite-dark",
+                  textColor: "text-gray-900",
+                },
+              ].map(({ step, title, desc, color, textColor, descColor }, i) => (
+                <React.Fragment key={i}>
+                  <motion.div
+                    className={`relative rounded-2xl p-7 border ${color} text-center shadow-sm`}
+                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  >
+                    <span className={`text-5xl font-bold font-heading opacity-10 absolute top-4 right-5 ${textColor}`}>{step}</span>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-sm ${color.includes("red") ? "bg-white/20 text-white" : "bg-red-dark/10 text-red-dark"}`}>
+                      {step}
+                    </div>
+                    <h4 className={`font-bold text-lg mb-2 font-heading ${textColor}`}>{title}</h4>
+                    <p className={`text-[13px] leading-relaxed ${descColor || "text-gray-500"}`}>{desc}</p>
+                  </motion.div>
+                  {i < 2 && (
+                    <div className="hidden md:flex items-center justify-center text-red-dark/40">
+                      <ArrowRight className="w-6 h-6" />
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+
+            <div className="mt-6 bg-yellow-light/20 border border-yellow-light rounded-xl p-4 text-center">
+              <p className="text-sm text-gray-700 font-medium">
+                All major operational expenses are borne by CrushBurg — as a franchise partner, your role is <strong>investment and profit participation only.</strong>
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Investment Models ── */}
+      <section className="relative z-10 padding-responsive py-16 md:py-20 bg-offwhite">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -548,9 +776,9 @@ const Franchise = () => {
               },
               {
                 icon: PieChart,
-                stat: "~76%",
-                title: "Estimated ROI",
-                desc: "Cafeteria model delivers ~76% ROI with an average payback of just 15.7 months.",
+                stat: "MG",
+                title: "Guaranteed Returns",
+                desc: "Minimum guaranteed returns on your investment — MG model ensures you earn regardless of sales fluctuations.",
               },
               {
                 icon: Award,
@@ -624,7 +852,7 @@ const Franchise = () => {
               </div>
               <h4 className="font-bold text-gray-900 mb-2">Operating Cities</h4>
               <p className="text-gray-500 text-[13px] leading-relaxed">
-                Lucknow (5+ outlets) and Bangalore (14+ outlets) — and growing every month.
+                Lucknow (Antas Mall, Meena Market, Crown Mall) and Bengaluru (15+ outlets across MG Road, Indiranagar, Koramangala & more).
               </p>
             </motion.div>
 
@@ -657,6 +885,149 @@ const Franchise = () => {
                 25+ active franchise partners and growing fast — join before your city fills up.
               </p>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Expansion Roadmap ── */}
+      <section className="relative z-10 padding-responsive py-16 md:py-20 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+              Where We're Headed
+            </p>
+            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
+              Growth <span className="text-red-dark">Roadmap</span>
+            </h2>
+            <motion.div
+              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              initial={{ width: 0 }}
+              whileInView={{ width: "3rem" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+          </motion.div>
+
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-offwhite-dark md:-translate-x-1/2" />
+
+            <div className="flex flex-col gap-8">
+              {[
+                { year: "2026", milestone: "100 Outlets", desc: "Rapid expansion across Tier 1 & Tier 2 cities in India with 100 operational outlets.", active: true },
+                { year: "2027", milestone: "200 Outlets", desc: "Double the network — deeper penetration into Tier 2 & Tier 3 cities, building a nationwide presence.", active: false },
+                { year: "2028", milestone: "International Expansion", desc: "Crossing borders — CrushBurg enters international markets, carrying Indian QSR excellence abroad.", active: false },
+                { year: "2030", milestone: "Largest Indian QSR Brand", desc: "The vision: become the largest and fastest growing Indian brand in the Quick Service Restaurant industry.", active: false },
+              ].map(({ year, milestone, desc, active }, i) => (
+                <motion.div
+                  key={year}
+                  className={`relative flex items-start gap-6 md:gap-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+                  initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                  {/* Content — mobile always left, desktop alternating */}
+                  <div className={`flex-1 pl-14 md:pl-0 ${i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
+                    <div className={`inline-block bg-offwhite rounded-xl border p-5 shadow-sm hover:shadow-md transition-shadow ${active ? "border-red-dark/30" : "border-offwhite-dark"}`}>
+                      <span className={`text-xs font-bold uppercase tracking-widest ${active ? "text-red-dark" : "text-gray-400"}`}>{year}</span>
+                      <h4 className="font-heading font-bold text-gray-900 text-base mt-1 mb-1">{milestone}</h4>
+                      <p className="text-gray-500 text-[13px] leading-relaxed">{desc}</p>
+                    </div>
+                  </div>
+
+                  {/* Dot — mobile left edge, desktop center */}
+                  <div className={`absolute left-4 md:left-1/2 md:-translate-x-1/2 top-6 w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center z-10 ${active ? "bg-red-dark border-red-dark" : "bg-white border-offwhite-dark"}`}>
+                    {active && <span className="w-2 h-2 rounded-full bg-white" />}
+                  </div>
+
+                  {/* Empty spacer for alternating desktop layout */}
+                  <div className="hidden md:block flex-1" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Awards & Recognition ── */}
+      <section className="relative z-10 padding-responsive py-16 md:py-20">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+              Credibility
+            </p>
+            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
+              Awards & <span className="text-red-dark">Recognition</span>
+            </h2>
+            <motion.div
+              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              initial={{ width: 0 }}
+              whileInView={{ width: "3rem" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {[
+              {
+                icon: Award,
+                title: "Rising Star Brand",
+                subtitle: "IGA — Indian Glory Award",
+                desc: "Awarded at New Delhi, Dec 2025. Recognized as fastest growing brand with 98% success ratio.",
+              },
+              {
+                icon: Star,
+                title: "CEO Excellence Award",
+                subtitle: "QSR Industry",
+                desc: "CrushBurg CEO recognized for exceptional leadership in the Quick Service Restaurant industry.",
+              },
+              {
+                icon: FileText,
+                title: "Icons of India",
+                subtitle: "IOI Magazine · 4th Position",
+                desc: "Featured among India's top emerging brands in the Icons of India magazine ranking.",
+              },
+              {
+                icon: CheckCircle,
+                title: "DPIIT Certified",
+                subtitle: "Govt. of India Recognition",
+                desc: "Certificate of Recognition from the Department for Promotion of Industry and Internal Trade.",
+              },
+            ].map(({ icon: Icon, title, subtitle, desc }, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-offwhite-dark hover:border-red-dark/20 hover:shadow-md transition-all duration-300 group"
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              >
+                <div className="w-11 h-11 bg-red-dark/8 rounded-xl flex items-center justify-center mb-4 text-red-dark group-hover:bg-red-dark/15 transition-colors duration-200">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <h4 className="font-bold text-gray-900 text-sm mb-0.5 group-hover:text-red-dark transition-colors duration-200">{title}</h4>
+                <p className="text-red-dark text-[11px] font-semibold uppercase tracking-wide mb-2">{subtitle}</p>
+                <p className="text-gray-500 text-[13px] leading-relaxed">{desc}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -713,6 +1084,9 @@ const Franchise = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* ── Franchise Inquiry Form ── */}
+      <FranchiseForm />
 
       {/* ── Final CTA ── */}
       <section className="relative z-10 padding-responsive py-16 md:py-20 pb-24">
@@ -771,12 +1145,12 @@ const Franchise = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-white/70">
-              <a href="tel:+917619910103" className="flex items-center gap-1.5 hover:text-white transition-colors">
-                <Phone className="w-3.5 h-3.5" /> +91 76199 10103
+              <a href="tel:+919511450700" className="flex items-center gap-1.5 hover:text-white transition-colors">
+                <Phone className="w-3.5 h-3.5" /> +91 95114 50700
               </a>
               <span className="hidden sm:block text-white/30">•</span>
-              <a href="mailto:connect@crushburg.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
-                <Mail className="w-3.5 h-3.5" /> connect@crushburg.com
+              <a href="mailto:hello@crushburg.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
+                <Mail className="w-3.5 h-3.5" /> hello@crushburg.com
               </a>
             </div>
           </motion.div>

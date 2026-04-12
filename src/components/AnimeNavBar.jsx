@@ -46,27 +46,29 @@ export function AnimeNavBar() {
             className="relative cursor-pointer text-sm font-bold px-5 py-2 rounded-full transition-colors duration-300 text-white"
           >
             {/* Active glow layers */}
-            {isActive && (
-              <motion.div
-                layoutId="active-pill"
-                className="absolute inset-0 rounded-full -z-10 overflow-hidden"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: [0.4, 0.7, 0.4],
-                  scale: [1, 1.04, 1],
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <div className="absolute inset-0 bg-yellow-light/20 rounded-full blur-md" />
-                <div className="absolute inset-[-4px] bg-yellow-light/15 rounded-full blur-xl" />
-                <div className="absolute inset-[-8px] bg-yellow-dark/10 rounded-full blur-2xl" />
-                {/* Shine sweep */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-yellow-light/0 via-yellow-light/20 to-yellow-light/0"
-                  style={{ animation: "shine 3s ease-in-out infinite" }}
-                />
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {isActive && (
+                <motion.div
+                  className="absolute inset-0 rounded-full -z-10 overflow-hidden"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: [0.4, 0.7, 0.4],
+                    scale: [1, 1.04, 1],
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <div className="absolute inset-0 bg-yellow-light/20 rounded-full blur-md" />
+                  <div className="absolute inset-[-4px] bg-yellow-light/15 rounded-full blur-xl" />
+                  <div className="absolute inset-[-8px] bg-yellow-dark/10 rounded-full blur-2xl" />
+                  {/* Shine sweep */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-yellow-light/0 via-yellow-light/20 to-yellow-light/0"
+                    style={{ animation: "shine 3s ease-in-out infinite" }}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Hover bg */}
             <AnimatePresence>
@@ -83,21 +85,22 @@ export function AnimeNavBar() {
             <span className="relative z-10">{item.name}</span>
 
             {/* Diamond pointer above active tab */}
-            {isActive && (
-              <motion.div
-                layoutId="anime-diamond"
-                className="absolute -top-4 left-1/2 w-4 h-4 -translate-x-1/2 pointer-events-none"
-                initial={false}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                animate={
-                  isHovered
-                    ? { y: [0, -6, 0], transition: { duration: 0.25, repeat: Infinity, repeatType: "reverse" } }
-                    : { y: [0, -3, 0], transition: { duration: 0.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.3 } }
-                }
-              >
-                <div className="w-full h-full bg-white rotate-45 transform origin-center shadow-sm" style={{ border: "1.5px solid #e6dcd3" }} />
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {isActive && (
+                <motion.div
+                  className="absolute -top-4 left-1/2 w-4 h-4 -translate-x-1/2 pointer-events-none"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  animate={
+                    isHovered
+                      ? { opacity: 1, scale: 1, y: [0, -6, 0], transition: { y: { duration: 0.25, repeat: Infinity, repeatType: "reverse" } } }
+                      : { opacity: 1, scale: 1, y: [0, -3, 0], transition: { y: { duration: 0.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.3 } } }
+                  }
+                >
+                  <div className="w-full h-full bg-white rotate-45 transform origin-center shadow-sm" style={{ border: "1.5px solid #e6dcd3" }} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </NavLink>
         );
       })}

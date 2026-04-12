@@ -88,19 +88,19 @@ const Contact = () => {
               <ContactDetail
                 Icon={MapPin}
                 label="Address"
-                value="Crown Mall, Lucknow, Uttar Pradesh, India"
+                value="915, Purvanchal Capital Tower, Vibhuti Khand, Gomti Nagar, Lucknow, U.P. - 226010"
               />
               <ContactDetail
                 Icon={Phone}
                 label="Phone"
-                value="+91 7619910103"
-                href="tel:+917619910103"
+                value="+91 9511450700"
+                href="tel:+919511450700"
               />
               <ContactDetail
                 Icon={Mail}
                 label="Email"
-                value="connect@crushburg.com"
-                href="mailto:connect@crushburg.com"
+                value="hello@crushburg.com"
+                href="mailto:hello@crushburg.com"
               />
             </div>
           </div>

@@ -8,6 +8,8 @@
 - All prices in Indian Rupees (₹39 – ₹179)
 - Vegetarian-only menu (no meat products)
 
+> **For any franchise, menu, outlet locations, investment models, leadership, awards, or general business info:** Always read [franchise-info.md](./franchise-info.md) first. This is the single source of truth for all business context.
+
 ---
 
 ## Tech Stack

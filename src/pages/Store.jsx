@@ -117,7 +117,7 @@ const StoreCard = ({ store }) => {
           Get Directions
         </a>
         <a
-          href="tel:+917619910103"
+          href="tel:+919511450700"
           className="inline-flex items-center gap-2 border-2 border-red-dark text-red-dark font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-red-dark hover:text-white transition-colors"
         >
           <Phone size={15} />
@@ -162,9 +162,9 @@ const FranchiseCard = () => (
     {/* Stats row */}
     <div className="grid grid-cols-3 gap-4">
       {[
-        { label: "Outlets", value: "2+" },
-        { label: "Cities", value: "1" },
-        { label: "Happy Customers", value: "10K+" },
+        { label: "Outlets", value: "18+" },
+        { label: "Cities", value: "2" },
+        { label: "Happy Customers", value: "50K+" },
       ].map((stat) => (
         <div
           key={stat.label}
@@ -178,6 +178,19 @@ const FranchiseCard = () => (
           </p>
         </div>
       ))}
+    </div>
+
+    {/* Coming Soon */}
+    <div className="bg-white border border-offwhite-dark rounded-2xl p-5 shadow-sm">
+      <p className="font-sans font-semibold text-xs text-gray-400 mb-3 uppercase tracking-wider">Coming Soon in Lucknow</p>
+      <div className="flex flex-wrap gap-2">
+        {["Phoenix United Mall", "Lulu Mall", "& more locations"].map((loc) => (
+          <span key={loc} className="inline-flex items-center gap-1.5 bg-yellow-light/40 text-black text-xs font-semibold px-3 py-1 rounded-full border border-yellow-light">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            {loc}
+          </span>
+        ))}
+      </div>
     </div>
   </div>
 );
@@ -244,7 +257,7 @@ const Store = () => {
               Our <span className="text-red-dark">Stores</span>
             </h1>
             <p className="para font-primary text-gray-400 mt-3 text-sm font-semibold uppercase tracking-widest">
-              Lucknow, UP — 2 Locations
+              Lucknow & Bengaluru — 18+ Locations
             </p>
           </motion.div>
 
@@ -255,8 +268,8 @@ const Store = () => {
             className="flex flex-col items-start md:items-end gap-4"
           >
             <p className="para font-primary text-gray-600 max-w-sm leading-relaxed md:text-right text-sm md:text-base">
-              Two locations in Lucknow, both ready to serve you the boldest,
-              freshest vegetarian burgers in the city — every single day.
+              18+ locations across Lucknow and Bengaluru, all serving the boldest,
+              freshest vegetarian burgers — every single day.
             </p>
             <button
               onClick={scrollToTimeline}
@@ -319,10 +332,10 @@ const Store = () => {
                 <MapPin size={16} /> Find a Store
               </button>
               <a
-                href="tel:+917619910103"
+                href="tel:+919511450700"
                 className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white font-semibold text-sm px-7 py-3.5 rounded-full hover:border-white transition-colors"
               >
-                <Phone size={16} /> +91 76199 10103
+                <Phone size={16} /> +91 95114 50700
               </a>
             </div>
           </div>
