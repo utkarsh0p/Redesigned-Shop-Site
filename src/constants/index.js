@@ -23,6 +23,9 @@ export const heroBanner =
 
 // Logos
 
+export const logoMain =
+  "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_auto,q_auto/v1780473408/Gemini_Generated_Image_j1hoklj1hoklj1ho_1_c8cinq.png";
+
 export const logoRed =
   "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_png,q_auto/v1757423334/download_bdveg9.png";
 
@@ -152,6 +155,10 @@ export const shopAiImage =
 
 export const shopAiImage2 =
   "https://res.cloudinary.com/dff30apwl/image/upload/f_auto,q_auto/v1759142202/WhatsApp_Image_2025-09-20_at_17.47.29_18efd7d9_nlfk8z.jpg";
+
+// Team / People
+export const ceoBanner =
+  "https://res.cloudinary.com/dff30apwl/image/upload/w_600,f_auto,q_auto/v1780471901/cbceo_fkygww.jpg";
 
 export const menu = {
   burgers: [

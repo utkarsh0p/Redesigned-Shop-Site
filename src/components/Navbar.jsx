@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { navLogo } from "../constants";
+import { logoMain } from "../constants";
 import { Home, Store, UtensilsCrossed, Phone, Info, Users } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
@@ -58,7 +58,7 @@ const Navbar = () => {
     <>
       {/* ── Desktop top bar ── */}
       <div className="hidden md:flex fixed top-0 left-0 right-0 z-[9998] items-center justify-between px-8 py-3 bg-white shadow-md overflow-visible">
-        <img src={navLogo} alt="logo" className="w-24 h-auto object-contain" />
+        <img src={logoMain} alt="logo" className="w-24 h-auto object-contain" />
         <AnimeNavBar />
         <div className="flex items-center gap-4">
           <SkyToggle />
@@ -69,7 +69,7 @@ const Navbar = () => {
       {/* ── Mobile top bar ── */}
       <nav className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-black flex items-center justify-between px-4 py-3 font-body">
         <div className="w-20 flex-shrink-0">
-          <img src={navLogo} alt="logo" className="w-full h-auto object-contain" />
+          <img src={logoMain} alt="logo" className="w-full h-auto object-contain" />
         </div>
         <div className="flex items-center gap-3">
           {!searchOpen && <SkyToggle />}

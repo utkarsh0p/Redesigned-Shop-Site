@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Twitter, Users, Phone, Mail } from "lucide-react";
-import { logoTwo } from "../constants";
+import { logoMain } from "../constants";
 
 const CONTACT_NUMBER = "+919511450700";
 const CONTACT_EMAIL = "hello@crushburg.com";
@@ -60,7 +60,7 @@ const Footer = () => {
           {/* Left — brand info */}
           <div className="flex flex-col gap-4 md:max-w-[220px] shrink-0">
             <Link to="/">
-              <img src={logoTwo} alt="CrushBurg" className="w-28 h-auto object-contain" />
+              <img src={logoMain} alt="CrushBurg" className="w-28 h-auto object-contain" />
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed">
               Your go-to burger franchise serving mouth-watering burgers, fries,

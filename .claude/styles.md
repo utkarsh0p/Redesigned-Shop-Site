@@ -149,6 +149,48 @@ or a 1px line colored #e6dcd3
 
 ---
 
+## Asset & Image Convention
+
+**All image URLs must live in `src/constants/index.js`** — never hardcode Cloudinary URLs directly in components.
+
+### Cloudinary URL format
+
+```
+https://res.cloudinary.com/dff30apwl/image/upload/{transformations}/{version}/{public_id}
+```
+
+Transformations are embedded in the URL path (not query params). Always include at minimum `f_auto,q_auto`.
+
+### Standard transformation presets
+
+| Use case | Transformations | Example export |
+|---|---|---|
+| Logo / nav icon | `w_300,f_auto,q_auto` | `logoMain`, `logoRed` |
+| Product / food card | `w_400,f_auto,q_auto` | `kingFusionBurger` |
+| Hero / banner (full-width) | `w_1100,f_auto,q_auto` | `heroBanner` |
+| Section banner / wide card | `w_800,f_auto,q_auto` | `modelImage` |
+| Portrait / person photo | `w_600,f_auto,q_auto` | `ceoBanner` |
+| Shop / store photo | `f_auto,q_auto` (no fixed w) | `shop`, `shopAiImage` |
+
+### When a new image URL is provided
+
+1. Add it to `src/constants/index.js` with the appropriate transformation preset.
+2. Export it with a descriptive camelCase name grouped under the relevant comment section (Logos, Burgers, Team / People, etc.).
+3. Import from `../constants` (or `../../constants`) in the component — never paste the raw URL into JSX.
+
+### Current logo exports
+
+| Export | Description |
+|---|---|
+| `logoMain` | Primary brand logo (new, Gemini-generated) |
+| `logoRed` | Red-variant logo |
+| `logoTwo` | Transparent CB logo |
+| `navLogo` | Navbar logo (JPG) |
+| `logo` | Original mark |
+| `logoName` | Wordmark / name-only |
+
+---
+
 ## Carousel / Slider
 
 Built with **Swiper 12**.

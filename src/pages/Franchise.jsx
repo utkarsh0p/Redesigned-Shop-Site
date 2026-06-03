@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { motion, useInView, useSpring, useTransform, useScroll } from "motion/react";
 import { MarqueeAnimation } from "../components/MarqueeAnimation.jsx";
-import { crusburgBrandingCard } from "../constants";
+import { crusburgBrandingCard, ceoBanner } from "../constants";
 import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -128,9 +128,6 @@ const steps = [
 
 const team = [
   { name: "Suraj Kumar Rai", role: "Chairman & Managing Director", initials: "SK" },
-  { name: "Vikash Rai", role: "Chief Executive Officer", initials: "VR" },
-  { name: "Karan Agrawal", role: "Head Chef & Quality Lead", initials: "KA" },
-  { name: "Vivek Singh", role: "Chief Operating Officer", initials: "VS" },
 ];
 
 const stats = [
@@ -1032,9 +1029,11 @@ const Franchise = () => {
         </div>
       </section>
 
-      {/* ── Leadership Team ── */}
+      {/* ── Leadership ── */}
       <section className="relative z-10 padding-responsive py-16 md:py-20 bg-white">
         <div className="max-w-5xl mx-auto">
+
+          {/* Section label */}
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -1043,10 +1042,10 @@ const Franchise = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
-              The Founders
+              The Visionary
             </p>
             <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              Leadership <span className="text-red-dark">Team</span>
+              Meet Our <span className="text-red-dark">Founder</span>
             </h2>
             <motion.div
               className="h-1 bg-red-dark rounded-full mx-auto mt-3"
@@ -1057,31 +1056,67 @@ const Franchise = () => {
             />
           </motion.div>
 
+          {/* CEO Card */}
           <motion.div
-            className="grid grid-cols-2 lg:grid-cols-4 gap-5"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
+            className="flex flex-col md:flex-row items-center gap-10 bg-offwhite rounded-3xl border border-offwhite-dark p-8 md:p-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
           >
-            {team.map(({ name, role, initials }, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="bg-offwhite rounded-2xl p-6 text-center border border-offwhite-dark hover:border-red-dark/20 hover:shadow-md transition-all duration-300 group"
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="w-14 h-14 bg-red-dark rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg font-heading shadow-md group-hover:scale-110 transition-transform duration-300">
-                  {initials}
-                </div>
-                <h3 className="font-bold text-gray-900 text-sm leading-snug mb-1 group-hover:text-red-dark transition-colors duration-200">
-                  {name}
-                </h3>
-                <p className="text-gray-500 text-[12px]">{role}</p>
-                <motion.div className="w-6 h-0.5 bg-red-dark rounded-full mx-auto mt-3 group-hover:w-10 transition-all duration-300" />
-              </motion.div>
-            ))}
+            {/* Photo */}
+            <motion.div
+              className="flex-shrink-0"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-lg ring-4 ring-red-dark/10">
+                <img
+                  src={ceoBanner}
+                  alt="Suraj Kumar Rai — Chairman & Managing Director, CrushBurg"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {/* Red accent strip */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-red-dark" />
+              </div>
+            </motion.div>
+
+            {/* Info */}
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+                Chairman &amp; Managing Director
+              </p>
+              <h3 className="font-sans font-bold text-gray-900 text-3xl md:text-4xl tracking-tight mb-1">
+                Suraj Kumar Rai
+              </h3>
+              <div className="w-10 h-0.5 bg-red-dark rounded-full mb-5 mx-auto md:mx-0" />
+
+              <blockquote className="text-gray-700 text-[15px] md:text-[16px] italic leading-relaxed mb-6 border-l-4 border-red-dark/30 pl-4">
+                "We are not here to compete, we are here to redefine standards."
+              </blockquote>
+
+              <ul className="flex flex-wrap gap-2 justify-center md:justify-start">
+                {[
+                  "Legacy-Driven Brand",
+                  "Franchise Profit Ecosystem",
+                  "Customer-First Experience",
+                  "Scalable Expansion",
+                  "Innovation in QSR",
+                ].map((tag) => (
+                  <li
+                    key={tag}
+                    className="bg-white border border-offwhite-dark text-gray-700 text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
+
         </div>
       </section>
 
