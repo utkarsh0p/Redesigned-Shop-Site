@@ -390,7 +390,7 @@ const Franchise = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.38 }}
           >
-            Operated by <span className="text-gray-600 font-semibold">Crushburg Private Limited</span> · Backed by <span className="text-gray-600 font-semibold">RAI Group</span> · DPIIT Recognized
+            Operated by <span className="text-gray-600 font-semibold">Crushburg Private Limited</span> · Backed by <span className="text-gray-600 font-semibold">Resplendent Adishakti Imperium Group</span> · DPIIT Recognized
           </motion.p>
 
           <motion.div
