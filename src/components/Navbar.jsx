@@ -3,7 +3,6 @@ import { logoMain } from "../constants";
 import { Home, Store, UtensilsCrossed, Phone, Info, Users } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import DiscoverButton from "./DiscoverButton";
 import AnimeNavBar from "./AnimeNavBar";
 import SkyToggle from "./SkyToggle";
 
@@ -34,7 +33,8 @@ const springTransition = { delay: 0.05, type: "spring", bounce: 0, duration: 0.5
 
 const Navbar = () => {
   const [selectedTab, setSelectedTab] = useState(null);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const dockRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,6 +50,19 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  // Hide on scroll down, show on scroll up
+  useEffect(() => {
+    const onScroll = () => {
+      const current = window.scrollY;
+      if (current < 10) { setNavVisible(true); return; }
+      if (Math.abs(current - lastScrollY.current) < 8) return;
+      setNavVisible(current < lastScrollY.current);
+      lastScrollY.current = current;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const activeRoute = BOTTOM_TABS.find((t) =>
     t.to === "/" ? location.pathname === "/" : location.pathname.startsWith(t.to)
   );
@@ -57,25 +70,29 @@ const Navbar = () => {
   return (
     <>
       {/* ── Desktop top bar ── */}
-      <div className="hidden md:flex fixed top-0 left-0 right-0 z-[9998] items-center justify-between px-8 py-3 bg-white shadow-md overflow-visible">
+      <motion.div
+        animate={{ y: navVisible ? 0 : "-100%" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="hidden md:flex fixed top-0 left-0 right-0 z-[9998] items-center justify-between px-8 py-3 bg-white shadow-md overflow-visible">
         <img src={logoMain} alt="logo" className="w-24 h-auto object-contain" />
         <AnimeNavBar />
         <div className="flex items-center gap-4">
           <SkyToggle />
-          <DiscoverButton />
         </div>
-      </div>
+      </motion.div>
 
       {/* ── Mobile top bar ── */}
-      <nav className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-black flex items-center justify-between px-4 py-3 font-body">
+      <motion.nav
+        animate={{ y: navVisible ? 0 : "-100%" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-black flex items-center justify-between px-4 py-3 font-body">
         <div className="w-20 flex-shrink-0">
           <img src={logoMain} alt="logo" className="w-full h-auto object-contain" />
         </div>
         <div className="flex items-center gap-3">
-          {!searchOpen && <SkyToggle />}
-          <DiscoverButton onSearchToggle={setSearchOpen} />
+          <SkyToggle />
         </div>
-      </nav>
+      </motion.nav>
 
       {/* ── Mobile Bottom Dock ── */}
       <div className="fixed bottom-4 left-0 right-0 flex justify-center md:hidden z-50">

@@ -32,7 +32,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const WHATSAPP_NUMBER = "+919511450700";
 const MANUAL_LINK =
-  "https://drive.google.com/file/d/1aUAn9DMq6G1CiqbuQyeLF6q-KbaQb6g3/view?usp=sharing";
+  "https://drive.google.com/file/d/1FGfZy2JUqgZp2jP0cWlCOVk1jX9fyQaw/view?usp=sharing";
 
 const pillars = [
   {
