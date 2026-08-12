@@ -54,7 +54,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-offwhite pt-28 pb-16 md:py-24 padding-responsive">
+    <section className="bg-cream pt-28 pb-16 md:py-24 padding-responsive">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -71,10 +71,10 @@ const Contact = () => {
         {/* Left — Info */}
         <div className="flex flex-col justify-between gap-10 max-w-sm mx-auto lg:mx-0 w-full">
           <div className="text-center lg:text-left">
-            <h1 className="heading font-heading font-bold text-3xl md:text-5xl text-red-dark mb-3">
+            <h1 className="heading font-heading font-bold text-3xl md:text-5xl text-brand mb-3">
               Contact Us
             </h1>
-            <p className="para font-primary text-gray-700 leading-relaxed">
+            <p className="para font-primary text-ink-soft leading-relaxed">
               We are available for questions, feedback, or collaboration
               opportunities. Let us know how we can help!
             </p>
@@ -107,7 +107,7 @@ const Contact = () => {
         </div>
 
         {/* Right — Form */}
-        <div className="mx-auto w-full max-w-screen-md bg-white rounded-2xl border border-offwhite-dark shadow-md p-8 md:p-10">
+        <div className="mx-auto w-full max-w-screen-md bg-white rounded-2xl border border-cream-dark shadow-md p-8 md:p-10">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col sm:flex-row gap-4">
               <FormField
@@ -155,7 +155,7 @@ const Contact = () => {
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="message"
-                className="para font-primary font-medium text-gray-700"
+                className="para font-primary font-medium text-ink-soft"
               >
                 Message
               </label>
@@ -167,7 +167,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full rounded-xl border border-offwhite-dark bg-offwhite px-4 py-2.5 para font-primary text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-dark resize-none transition"
+                className="w-full rounded-xl border border-cream-dark bg-cream px-4 py-2.5 para font-primary text-ink placeholder:text-muted-light focus:outline-none focus:ring-2 focus:ring-brand resize-none transition"
               />
             </div>
 
@@ -186,17 +186,17 @@ const Contact = () => {
 
 const ContactDetail = ({ Icon, label, value, href }) => (
   <div className="flex items-start gap-3">
-    <div className="mt-0.5 flex-shrink-0 bg-red-dark/10 p-2 rounded-full">
-      <Icon className="text-red-dark" size={18} />
+    <div className="mt-0.5 flex-shrink-0 bg-brand/10 p-2 rounded-full">
+      <Icon className="text-brand" size={18} />
     </div>
     <div>
-      <span className="para font-primary font-semibold text-gray-800">{label}: </span>
+      <span className="para font-primary font-semibold text-ink">{label}: </span>
       {href ? (
-        <a href={href} className="para font-primary text-gray-600 underline underline-offset-2 hover:text-red-dark transition">
+        <a href={href} className="para font-primary text-ink-soft underline underline-offset-2 hover:text-brand transition">
           {value}
         </a>
       ) : (
-        <span className="para font-primary text-gray-600">{value}</span>
+        <span className="para font-primary text-ink-soft">{value}</span>
       )}
     </div>
   </div>
@@ -214,7 +214,7 @@ const FormField = ({
   required,
 }) => (
   <div className="flex flex-col gap-1.5 w-full">
-    <label htmlFor={id} className="para font-primary font-medium text-gray-700">
+    <label htmlFor={id} className="para font-primary font-medium text-ink-soft">
       {label}
     </label>
     <input
@@ -226,7 +226,7 @@ const FormField = ({
       onChange={onChange}
       required={required}
       maxLength={maxLength}
-      className="w-full rounded-xl border border-offwhite-dark bg-offwhite px-4 py-2.5 para font-primary text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-dark transition"
+      className="w-full rounded-xl border border-cream-dark bg-cream px-4 py-2.5 para font-primary text-ink placeholder:text-muted-light focus:outline-none focus:ring-2 focus:ring-brand transition"
     />
   </div>
 );

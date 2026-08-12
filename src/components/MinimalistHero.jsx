@@ -21,7 +21,7 @@ function FloatingPaths({ position }) {
           <motion.path
             key={path.id}
             d={path.d}
-            stroke="#D32F2F"
+            stroke="#5F3425"
             strokeWidth={path.width}
             strokeOpacity={0.05 + path.id * 0.015}
             initial={{ pathLength: 0.3, opacity: 0.6 }}
@@ -44,7 +44,7 @@ function FloatingPaths({ position }) {
 
 const MinimalistHero = ({ imageSrc }) => {
   return (
-    <div className="relative flex min-h-[90vh] w-full flex-col items-center justify-center bg-offwhite px-6 py-10 md:px-12 md:py-0 md:h-[90vh] md:overflow-hidden">
+    <div className="relative flex min-h-[90vh] w-full flex-col items-center justify-center bg-cream px-6 py-10 md:px-12 md:py-0 md:h-[90vh] md:overflow-hidden">
       {/* Floating paths background */}
       <div className="absolute inset-0 overflow-hidden">
         <FloatingPaths position={1} />
@@ -59,13 +59,13 @@ const MinimalistHero = ({ imageSrc }) => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="z-20 order-2 md:order-1 text-center md:text-left"
         >
-          <p className="para mx-auto max-w-xs leading-relaxed text-black/70 md:mx-0">
+          <p className="para mx-auto max-w-xs leading-relaxed text-ink/70 md:mx-0">
             Bold flavours. Fresh ingredients. 100% vegetarian. Every bite at
             CrushBurg is crafted to impress.
           </p>
           <a
             href="/menu"
-            className="mt-4 inline-block text-sm font-semibold text-red-dark underline decoration-from-font hover:text-red-light transition-colors"
+            className="mt-4 inline-block text-sm font-semibold text-brand underline decoration-from-font hover:text-brand-light transition-colors"
           >
             View Menu →
           </a>
@@ -77,7 +77,7 @@ const MinimalistHero = ({ imageSrc }) => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="absolute z-0 h-[260px] w-[260px] rounded-full bg-yellow-light md:h-[340px] md:w-[340px] lg:h-[420px] lg:w-[420px]"
+            className="absolute z-0 h-[260px] w-[260px] rounded-full bg-gold md:h-[340px] md:w-[340px] lg:h-[420px] lg:w-[420px]"
           />
           <motion.img
             src={imageSrc}
@@ -96,8 +96,8 @@ const MinimalistHero = ({ imageSrc }) => {
           transition={{ duration: 0.6, delay: 1 }}
           className="z-20 order-3 flex items-center justify-center text-center md:justify-end md:pl-8"
         >
-          <h1 className="text-5xl font-extrabold text-black uppercase tracking-tight font-sans leading-none md:text-4xl lg:text-5xl whitespace-nowrap">
-            CRUSH<span className="text-red-dark">BURG</span>
+          <h1 className="text-5xl font-extrabold text-ink uppercase tracking-tight font-sans leading-none md:text-4xl lg:text-5xl whitespace-nowrap">
+            CRUSH<span className="text-brand">BURG</span>
           </h1>
         </motion.div>
       </div>

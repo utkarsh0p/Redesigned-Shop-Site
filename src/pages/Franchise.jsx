@@ -165,13 +165,13 @@ function StatCounter({ value, suffix, label, delay }) {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
     >
-      <div className="text-4xl md:text-5xl font-bold text-red-dark font-heading flex items-center justify-center gap-1">
+      <div className="text-4xl md:text-5xl font-bold text-brand font-heading flex items-center justify-center gap-1">
         <motion.span>{display}</motion.span>
         <span>{suffix}</span>
       </div>
-      <p className="text-gray-600 text-sm mt-1 font-medium">{label}</p>
+      <p className="text-ink-soft text-sm mt-1 font-medium">{label}</p>
       <motion.div
-        className="h-0.5 bg-red-dark rounded-full mx-auto mt-2 w-0 group-hover:w-10 transition-all duration-300"
+        className="h-0.5 bg-brand rounded-full mx-auto mt-2 w-0 group-hover:w-10 transition-all duration-300"
       />
     </motion.div>
   );
@@ -228,8 +228,8 @@ const FranchiseForm = () => {
     }
   };
 
-  const inputClass = "w-full rounded-xl border border-offwhite-dark bg-offwhite px-4 py-2.5 text-sm font-primary text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-dark transition";
-  const labelClass = "block text-sm font-medium font-primary text-gray-700 mb-1.5";
+  const inputClass = "w-full rounded-xl border border-cream-dark bg-cream px-4 py-2.5 text-sm font-primary text-ink placeholder:text-muted-light focus:outline-none focus:ring-2 focus:ring-brand transition";
+  const labelClass = "block text-sm font-medium font-primary text-ink-soft mb-1.5";
 
   return (
     <section className="relative z-10 padding-responsive py-16 md:py-20">
@@ -241,19 +241,19 @@ const FranchiseForm = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+          <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
             Get Started
           </p>
-          <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-            Send an <span className="text-red-dark">Enquiry</span>
+          <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+            Send an <span className="text-brand">Enquiry</span>
           </h2>
-          <p className="text-gray-500 text-sm max-w-lg mx-auto mt-3">
+          <p className="text-muted text-sm max-w-lg mx-auto mt-3">
             Fill in your details and our franchise team will reach out within 24 hours.
           </p>
         </motion.div>
 
         <motion.div
-          className="bg-white rounded-2xl border border-offwhite-dark shadow-sm p-8 md:p-10"
+          className="bg-white rounded-2xl border border-cream-dark shadow-sm p-8 md:p-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -302,13 +302,13 @@ const FranchiseForm = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-red-dark hover:bg-red-light text-white px-8 py-3 rounded-full font-semibold text-sm shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-light text-white px-8 py-3 rounded-full font-semibold text-sm shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? "Sending..." : <><ArrowRight className="w-4 h-4" /> Submit Enquiry</>}
               </button>
-              <p className="text-gray-400 text-[12px] text-center sm:text-left">
+              <p className="text-muted-light text-[12px] text-center sm:text-left">
                 Or reach us directly at{" "}
-                <a href="mailto:hello@crushburg.com" className="text-red-dark hover:underline">hello@crushburg.com</a>
+                <a href="mailto:hello@crushburg.com" className="text-brand hover:underline">hello@crushburg.com</a>
               </p>
             </div>
           </form>
@@ -327,25 +327,25 @@ const Franchise = () => {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-offwhite overflow-x-hidden">
+    <div ref={pageRef} className="min-h-screen bg-cream overflow-x-hidden">
       <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover theme="colored" />
 
       {/* ── Decorative blobs ── */}
       <motion.div
-        className="fixed top-20 -left-20 w-80 h-80 rounded-full bg-red-dark/5 blur-3xl pointer-events-none z-0"
+        className="fixed top-20 -left-20 w-80 h-80 rounded-full bg-brand/5 blur-3xl pointer-events-none z-0"
         style={{ y: y1 }}
       />
       <motion.div
-        className="fixed bottom-20 -right-20 w-96 h-96 rounded-full bg-yellow-light/10 blur-3xl pointer-events-none z-0"
+        className="fixed bottom-20 -right-20 w-96 h-96 rounded-full bg-gold/10 blur-3xl pointer-events-none z-0"
         style={{ y: y2 }}
       />
       <motion.div
-        className="fixed top-1/2 left-1/3 w-3 h-3 rounded-full bg-red-dark/20 pointer-events-none z-0"
+        className="fixed top-1/2 left-1/3 w-3 h-3 rounded-full bg-brand/20 pointer-events-none z-0"
         animate={{ y: [0, -20, 0], opacity: [0.3, 0.8, 0.3] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="fixed top-1/3 right-1/4 w-4 h-4 rounded-full bg-yellow-light/40 pointer-events-none z-0"
+        className="fixed top-1/3 right-1/4 w-4 h-4 rounded-full bg-gold/40 pointer-events-none z-0"
         animate={{ y: [0, 18, 0], opacity: [0.3, 0.9, 0.3] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
       />
@@ -354,7 +354,7 @@ const Franchise = () => {
       <section className="relative z-10 padding-responsive pt-28 pb-14 md:pt-28 md:pb-20">
         <div className="max-w-4xl mx-auto text-center">
           <motion.span
-            className="inline-flex items-center gap-2 text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-4"
+            className="inline-flex items-center gap-2 text-brand font-semibold uppercase tracking-widest text-[11px] mb-4"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -363,18 +363,18 @@ const Franchise = () => {
           </motion.span>
 
           <motion.h1
-            className="heading font-sans font-bold text-gray-900 uppercase tracking-tight mb-5"
+            className="heading font-sans font-bold text-ink uppercase tracking-tight mb-5"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             Own a{" "}
-            <span className="text-red-dark">CrushBurg</span>{" "}
+            <span className="text-brand">CrushBurg</span>{" "}
             Franchise
           </motion.h1>
 
           <motion.p
-            className="para text-gray-600 max-w-2xl mx-auto mb-4 leading-relaxed"
+            className="para text-ink-soft max-w-2xl mx-auto mb-4 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -385,12 +385,12 @@ const Franchise = () => {
           </motion.p>
 
           <motion.p
-            className="text-[12px] text-gray-400 font-medium mb-8"
+            className="text-[12px] text-muted-light font-medium mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.38 }}
           >
-            Operated by <span className="text-gray-600 font-semibold">Crushburg Private Limited</span> · Backed by <span className="text-gray-600 font-semibold">Resplendent Adishakti Imperium Group</span> · DPIIT Recognized
+            Operated by <span className="text-ink-soft font-semibold">Crushburg Private Limited</span> · Backed by <span className="text-ink-soft font-semibold">Resplendent Adishakti Imperium Group</span> · DPIIT Recognized
           </motion.p>
 
           <motion.div
@@ -413,7 +413,7 @@ const Franchise = () => {
               href={MANUAL_LINK}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-white border border-offwhite-dark text-gray-800 hover:border-red-dark/30 hover:text-red-dark px-7 py-3 rounded-full font-semibold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-white border border-cream-dark text-ink hover:border-brand/30 hover:text-brand px-7 py-3 rounded-full font-semibold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5"
             >
               <FileText className="w-4 h-4" /> View Franchise Manual
             </a>
@@ -423,10 +423,10 @@ const Franchise = () => {
 
       {/* ── Marquee ── */}
       <div className="flex flex-col gap-0 overflow-hidden">
-        <MarqueeAnimation direction="left" baseVelocity={0.45} className="text-white bg-red-dark py-2 tracking-widest">
+        <MarqueeAnimation direction="left" baseVelocity={0.45} className="text-white bg-brand py-2 tracking-widest">
           FRANCHISE &nbsp;•&nbsp; PARTNER WITH US &nbsp;•&nbsp; GROW YOUR BUSINESS &nbsp;•&nbsp; CRUSHBURG &nbsp;•&nbsp;
         </MarqueeAnimation>
-        <MarqueeAnimation direction="right" baseVelocity={0.45} className="text-black bg-yellow-light py-2 tracking-widest">
+        <MarqueeAnimation direction="right" baseVelocity={0.45} className="text-on-gold bg-gold py-2 tracking-widest">
           ₹25L INVESTMENT &nbsp;•&nbsp; GUARANTEED RETURNS &nbsp;•&nbsp; FULL SUPPORT &nbsp;•&nbsp; FICO MODEL &nbsp;•&nbsp; DPIIT RECOGNIZED &nbsp;•&nbsp;
         </MarqueeAnimation>
       </div>
@@ -450,14 +450,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               What We Stand For
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              Our <span className="text-red-dark">Pillars</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              Our <span className="text-brand">Pillars</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -476,19 +476,19 @@ const Franchise = () => {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-offwhite-dark hover:border-red-dark/20 transition-all duration-300 group text-center"
+                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg border border-cream-dark hover:border-brand/20 transition-all duration-300 group text-center"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <motion.div
-                  className="w-12 h-12 bg-red-dark/8 rounded-xl flex items-center justify-center mx-auto mb-4 text-red-dark group-hover:bg-red-dark/15 transition-colors duration-300"
+                  className="w-12 h-12 bg-brand/8 rounded-xl flex items-center justify-center mx-auto mb-4 text-brand group-hover:bg-brand/15 transition-colors duration-300"
                   whileHover={{ rotate: [0, -8, 8, -4, 0], transition: { duration: 0.4 } }}
                 >
                   <Icon className="w-5 h-5" />
                 </motion.div>
-                <h4 className="font-semibold text-gray-900 text-sm mb-2 group-hover:text-red-dark transition-colors duration-200">
+                <h4 className="font-semibold text-ink text-sm mb-2 group-hover:text-brand transition-colors duration-200">
                   {title}
                 </h4>
-                <p className="text-gray-500 text-[13px] leading-relaxed">{desc}</p>
+                <p className="text-muted text-[13px] leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -505,13 +505,13 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               How It Works
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              The <span className="text-red-dark">FICO Model</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              The <span className="text-brand">FICO Model</span>
             </h2>
-            <p className="text-gray-500 text-sm max-w-xl mx-auto mt-3 leading-relaxed">
+            <p className="text-muted text-sm max-w-xl mx-auto mt-3 leading-relaxed">
               FICO (Franchisor Invested Company Operated) is our unique franchise structure — you invest once, we run the business, and you earn guaranteed returns.
             </p>
           </motion.div>
@@ -530,14 +530,14 @@ const Franchise = () => {
                   step: "01",
                   title: "You Invest",
                   desc: "One-time investment. No recurring fees. You choose your model — Café, Cafeteria, or Drive Cafeteria.",
-                  color: "bg-offwhite border-offwhite-dark",
-                  textColor: "text-gray-900",
+                  color: "bg-cream border-cream-dark",
+                  textColor: "text-ink",
                 },
                 {
                   step: "02",
                   title: "We Operate",
                   desc: "CrushBurg's team handles staffing, training, supply chain, quality control, and daily operations entirely.",
-                  color: "bg-red-dark",
+                  color: "bg-brand",
                   textColor: "text-white",
                   descColor: "text-white/75",
                 },
@@ -545,8 +545,8 @@ const Franchise = () => {
                   step: "03",
                   title: "You Earn",
                   desc: "Receive guaranteed minimum returns every month, based on your investment — regardless of sales volume.",
-                  color: "bg-offwhite border-offwhite-dark",
-                  textColor: "text-gray-900",
+                  color: "bg-cream border-cream-dark",
+                  textColor: "text-ink",
                 },
               ].map(({ step, title, desc, color, textColor, descColor }, i) => (
                 <React.Fragment key={i}>
@@ -555,14 +555,14 @@ const Franchise = () => {
                     whileHover={{ y: -4, transition: { duration: 0.2 } }}
                   >
                     <span className={`text-5xl font-bold font-heading opacity-10 absolute top-4 right-5 ${textColor}`}>{step}</span>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-sm ${color.includes("red") ? "bg-white/20 text-white" : "bg-red-dark/10 text-red-dark"}`}>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-sm ${color.includes("bg-brand") ? "bg-white/20 text-white" : "bg-brand/10 text-brand"}`}>
                       {step}
                     </div>
                     <h4 className={`font-bold text-lg mb-2 font-heading ${textColor}`}>{title}</h4>
-                    <p className={`text-[13px] leading-relaxed ${descColor || "text-gray-500"}`}>{desc}</p>
+                    <p className={`text-[13px] leading-relaxed ${descColor || "text-muted"}`}>{desc}</p>
                   </motion.div>
                   {i < 2 && (
-                    <div className="hidden md:flex items-center justify-center text-red-dark/40">
+                    <div className="hidden md:flex items-center justify-center text-brand/40">
                       <ArrowRight className="w-6 h-6" />
                     </div>
                   )}
@@ -570,8 +570,8 @@ const Franchise = () => {
               ))}
             </div>
 
-            <div className="mt-6 bg-yellow-light/20 border border-yellow-light rounded-xl p-4 text-center">
-              <p className="text-sm text-gray-700 font-medium">
+            <div className="mt-6 bg-gold/20 border border-gold rounded-xl p-4 text-center">
+              <p className="text-sm text-ink-soft font-medium">
                 All major operational expenses are borne by CrushBurg — as a franchise partner, your role is <strong>investment and profit participation only.</strong>
               </p>
             </div>
@@ -580,7 +580,7 @@ const Franchise = () => {
       </section>
 
       {/* ── Investment Models ── */}
-      <section className="relative z-10 padding-responsive py-16 md:py-20 bg-offwhite">
+      <section className="relative z-10 padding-responsive py-16 md:py-20 bg-cream">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -589,14 +589,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               Choose Your Path
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              Investment <span className="text-red-dark">Models</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              Investment <span className="text-brand">Models</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -617,26 +617,26 @@ const Franchise = () => {
                 variants={fadeUp}
                 className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
                   model.featured
-                    ? "bg-red-dark text-white shadow-xl scale-[1.03]"
-                    : "bg-offwhite border border-offwhite-dark hover:border-red-dark/25 hover:shadow-lg shadow-sm"
+                    ? "bg-brand text-white shadow-xl scale-[1.03]"
+                    : "bg-cream border border-cream-dark hover:border-brand/25 hover:shadow-lg shadow-sm"
                 }`}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
               >
                 {model.badge && (
                   <div className="absolute top-4 right-4">
-                    <span className="bg-yellow-light text-black text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                    <span className="bg-gold text-on-gold text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
                       <Star className="w-3 h-3" /> {model.badge}
                     </span>
                   </div>
                 )}
                 <div className="p-7">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${model.featured ? "bg-white/20" : "bg-red-dark/8"}`}>
-                    <Building2 className={`w-5 h-5 ${model.featured ? "text-white" : "text-red-dark"}`} />
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${model.featured ? "bg-white/20" : "bg-brand/8"}`}>
+                    <Building2 className={`w-5 h-5 ${model.featured ? "text-white" : "text-brand"}`} />
                   </div>
-                  <h3 className={`text-xl font-bold mb-0.5 font-heading ${model.featured ? "text-white" : "text-gray-900"}`}>
+                  <h3 className={`text-xl font-bold mb-0.5 font-heading ${model.featured ? "text-white" : "text-ink"}`}>
                     {model.title}
                   </h3>
-                  <p className={`text-xs mb-5 ${model.featured ? "text-white/70" : "text-gray-500"}`}>
+                  <p className={`text-xs mb-5 ${model.featured ? "text-white/70" : "text-muted"}`}>
                     {model.subtitle}
                   </p>
                   <ul className="space-y-3">
@@ -644,13 +644,13 @@ const Franchise = () => {
                       <li
                         key={j}
                         className={`flex items-start justify-between gap-3 text-sm pb-3 border-b last:border-b-0 ${
-                          model.featured ? "border-white/15" : "border-offwhite-dark"
+                          model.featured ? "border-white/15" : "border-cream-dark"
                         }`}
                       >
-                        <span className={model.featured ? "text-white/75" : "text-gray-500"}>
+                        <span className={model.featured ? "text-white/75" : "text-muted"}>
                           {item.label}
                         </span>
-                        <strong className={`text-right ${model.featured ? "text-white" : "text-gray-900"}`}>
+                        <strong className={`text-right ${model.featured ? "text-white" : "text-ink"}`}>
                           {item.value}
                         </strong>
                       </li>
@@ -664,8 +664,8 @@ const Franchise = () => {
                     rel="noreferrer"
                     className={`mt-6 w-full flex items-center justify-center gap-2 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
                       model.featured
-                        ? "bg-yellow-light text-black hover:bg-yellow-dark"
-                        : "bg-red-dark text-white hover:bg-red-light"
+                        ? "bg-gold text-on-gold hover:bg-gold-dark"
+                        : "bg-brand text-white hover:bg-brand-light"
                     }`}
                   >
                     Enquire Now <ArrowRight className="w-3.5 h-3.5" />
@@ -687,14 +687,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               Simple Process
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              How It <span className="text-red-dark">Works</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              How It <span className="text-brand">Works</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -713,19 +713,19 @@ const Franchise = () => {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="relative bg-white rounded-2xl p-6 shadow-sm border border-offwhite-dark hover:border-red-dark/20 hover:shadow-md transition-all duration-300 group"
+                className="relative bg-white rounded-2xl p-6 shadow-sm border border-cream-dark hover:border-brand/20 hover:shadow-md transition-all duration-300 group"
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
               >
-                <span className="text-[52px] font-bold text-offwhite-dark leading-none select-none absolute top-4 right-5 font-heading">
+                <span className="text-[52px] font-bold text-cream-dark leading-none select-none absolute top-4 right-5 font-heading">
                   {number}
                 </span>
-                <div className="w-11 h-11 bg-red-dark/8 rounded-xl flex items-center justify-center mb-4 text-red-dark group-hover:bg-red-dark/15 transition-colors duration-200 relative z-10">
+                <div className="w-11 h-11 bg-brand/8 rounded-xl flex items-center justify-center mb-4 text-brand group-hover:bg-brand/15 transition-colors duration-200 relative z-10">
                   <Icon className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-gray-900 mb-2 group-hover:text-red-dark transition-colors duration-200">
+                <h4 className="font-bold text-ink mb-2 group-hover:text-brand transition-colors duration-200">
                   {title}
                 </h4>
-                <p className="text-gray-500 text-[13px] leading-relaxed">{desc}</p>
+                <p className="text-muted text-[13px] leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -742,14 +742,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               Why Now
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              The <span className="text-red-dark">Opportunity</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              The <span className="text-brand">Opportunity</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -787,21 +787,21 @@ const Franchise = () => {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-offwhite rounded-2xl p-8 border border-offwhite-dark hover:border-red-dark/20 hover:shadow-md transition-all duration-300 group"
+                className="bg-cream rounded-2xl p-8 border border-cream-dark hover:border-brand/20 hover:shadow-md transition-all duration-300 group"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-11 h-11 bg-red-dark/8 rounded-xl flex items-center justify-center flex-shrink-0 text-red-dark group-hover:bg-red-dark/15 transition-colors duration-200">
+                  <div className="w-11 h-11 bg-brand/8 rounded-xl flex items-center justify-center flex-shrink-0 text-brand group-hover:bg-brand/15 transition-colors duration-200">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <div className="text-4xl font-bold text-red-dark font-heading leading-none">
+                  <div className="text-4xl font-bold text-brand font-heading leading-none">
                     {stat}
                   </div>
                 </div>
-                <h4 className="font-bold text-gray-900 mb-2 group-hover:text-red-dark transition-colors duration-200">
+                <h4 className="font-bold text-ink mb-2 group-hover:text-brand transition-colors duration-200">
                   {title}
                 </h4>
-                <p className="text-gray-500 text-[13px] leading-relaxed">{desc}</p>
+                <p className="text-muted text-[13px] leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -818,14 +818,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               Expansion
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              The Road <span className="text-red-dark">Ahead</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              The Road <span className="text-brand">Ahead</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -842,28 +842,28 @@ const Franchise = () => {
           >
             <motion.div
               variants={fadeUp}
-              className="bg-white rounded-2xl p-7 shadow-sm border border-offwhite-dark hover:shadow-md hover:border-red-dark/20 transition-all duration-300 group"
+              className="bg-white rounded-2xl p-7 shadow-sm border border-cream-dark hover:shadow-md hover:border-brand/20 transition-all duration-300 group"
             >
-              <div className="w-11 h-11 bg-red-dark/8 rounded-xl flex items-center justify-center mb-4 text-red-dark">
+              <div className="w-11 h-11 bg-brand/8 rounded-xl flex items-center justify-center mb-4 text-brand">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Operating Cities</h4>
-              <p className="text-gray-500 text-[13px] leading-relaxed">
+              <h4 className="font-bold text-ink mb-2">Operating Cities</h4>
+              <p className="text-muted text-[13px] leading-relaxed">
                 Lucknow (Antas Mall, Meena Market, Crown Mall) and Bengaluru (15+ outlets across MG Road, Indiranagar, Koramangala & more).
               </p>
             </motion.div>
 
             <motion.div
               variants={fadeUp}
-              className="bg-white rounded-2xl p-7 shadow-sm border border-offwhite-dark hover:shadow-md hover:border-red-dark/20 transition-all duration-300 group"
+              className="bg-white rounded-2xl p-7 shadow-sm border border-cream-dark hover:shadow-md hover:border-brand/20 transition-all duration-300 group"
             >
-              <div className="w-11 h-11 bg-red-dark/8 rounded-xl flex items-center justify-center mb-4 text-red-dark">
+              <div className="w-11 h-11 bg-brand/8 rounded-xl flex items-center justify-center mb-4 text-brand">
                 <Rocket className="w-5 h-5" />
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Upcoming Expansion</h4>
+              <h4 className="font-bold text-ink mb-2">Upcoming Expansion</h4>
               <div className="flex flex-wrap gap-2 mt-3">
                 {["Prayagraj", "Varanasi", "Gorakhpur", "Kanpur", "Noida", "Ayodhya", "Agra"].map((city) => (
-                  <span key={city} className="bg-offwhite text-gray-700 text-[11px] font-semibold px-3 py-1 rounded-full border border-offwhite-dark">
+                  <span key={city} className="bg-cream text-ink-soft text-[11px] font-semibold px-3 py-1 rounded-full border border-cream-dark">
                     {city}
                   </span>
                 ))}
@@ -872,13 +872,13 @@ const Franchise = () => {
 
             <motion.div
               variants={fadeUp}
-              className="bg-white rounded-2xl p-7 shadow-sm border border-offwhite-dark hover:shadow-md hover:border-red-dark/20 transition-all duration-300 group"
+              className="bg-white rounded-2xl p-7 shadow-sm border border-cream-dark hover:shadow-md hover:border-brand/20 transition-all duration-300 group"
             >
-              <div className="w-11 h-11 bg-red-dark/8 rounded-xl flex items-center justify-center mb-4 text-red-dark">
+              <div className="w-11 h-11 bg-brand/8 rounded-xl flex items-center justify-center mb-4 text-brand">
                 <Handshake className="w-5 h-5" />
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Partner Network</h4>
-              <p className="text-gray-500 text-[13px] leading-relaxed">
+              <h4 className="font-bold text-ink mb-2">Partner Network</h4>
+              <p className="text-muted text-[13px] leading-relaxed">
                 25+ active franchise partners and growing fast — join before your city fills up.
               </p>
             </motion.div>
@@ -896,14 +896,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               Where We're Headed
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              Growth <span className="text-red-dark">Roadmap</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              Growth <span className="text-brand">Roadmap</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -913,7 +913,7 @@ const Franchise = () => {
 
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-offwhite-dark md:-translate-x-1/2" />
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-cream-dark md:-translate-x-1/2" />
 
             <div className="flex flex-col gap-8">
               {[
@@ -932,15 +932,15 @@ const Franchise = () => {
                 >
                   {/* Content — mobile always left, desktop alternating */}
                   <div className={`flex-1 pl-14 md:pl-0 ${i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
-                    <div className={`inline-block bg-offwhite rounded-xl border p-5 shadow-sm hover:shadow-md transition-shadow ${active ? "border-red-dark/30" : "border-offwhite-dark"}`}>
-                      <span className={`text-xs font-bold uppercase tracking-widest ${active ? "text-red-dark" : "text-gray-400"}`}>{year}</span>
-                      <h4 className="font-heading font-bold text-gray-900 text-base mt-1 mb-1">{milestone}</h4>
-                      <p className="text-gray-500 text-[13px] leading-relaxed">{desc}</p>
+                    <div className={`inline-block bg-cream rounded-xl border p-5 shadow-sm hover:shadow-md transition-shadow ${active ? "border-brand/30" : "border-cream-dark"}`}>
+                      <span className={`text-xs font-bold uppercase tracking-widest ${active ? "text-brand" : "text-muted-light"}`}>{year}</span>
+                      <h4 className="font-heading font-bold text-ink text-base mt-1 mb-1">{milestone}</h4>
+                      <p className="text-muted text-[13px] leading-relaxed">{desc}</p>
                     </div>
                   </div>
 
                   {/* Dot — mobile left edge, desktop center */}
-                  <div className={`absolute left-4 md:left-1/2 md:-translate-x-1/2 top-6 w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center z-10 ${active ? "bg-red-dark border-red-dark" : "bg-white border-offwhite-dark"}`}>
+                  <div className={`absolute left-4 md:left-1/2 md:-translate-x-1/2 top-6 w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center z-10 ${active ? "bg-brand border-brand" : "bg-white border-cream-dark"}`}>
                     {active && <span className="w-2 h-2 rounded-full bg-white" />}
                   </div>
 
@@ -963,14 +963,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               Credibility
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              Awards & <span className="text-red-dark">Recognition</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              Awards & <span className="text-brand">Recognition</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -1014,15 +1014,15 @@ const Franchise = () => {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-offwhite-dark hover:border-red-dark/20 hover:shadow-md transition-all duration-300 group"
+                className="bg-white rounded-2xl p-6 shadow-sm border border-cream-dark hover:border-brand/20 hover:shadow-md transition-all duration-300 group"
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
               >
-                <div className="w-11 h-11 bg-red-dark/8 rounded-xl flex items-center justify-center mb-4 text-red-dark group-hover:bg-red-dark/15 transition-colors duration-200">
+                <div className="w-11 h-11 bg-brand/8 rounded-xl flex items-center justify-center mb-4 text-brand group-hover:bg-brand/15 transition-colors duration-200">
                   <Icon className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-gray-900 text-sm mb-0.5 group-hover:text-red-dark transition-colors duration-200">{title}</h4>
-                <p className="text-red-dark text-[11px] font-semibold uppercase tracking-wide mb-2">{subtitle}</p>
-                <p className="text-gray-500 text-[13px] leading-relaxed">{desc}</p>
+                <h4 className="font-bold text-ink text-sm mb-0.5 group-hover:text-brand transition-colors duration-200">{title}</h4>
+                <p className="text-brand text-[11px] font-semibold uppercase tracking-wide mb-2">{subtitle}</p>
+                <p className="text-muted text-[13px] leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -1041,14 +1041,14 @@ const Franchise = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+            <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
               The Visionary
             </p>
-            <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight">
-              Meet Our <span className="text-red-dark">Founder</span>
+            <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight">
+              Meet Our <span className="text-brand">Founder</span>
             </h2>
             <motion.div
-              className="h-1 bg-red-dark rounded-full mx-auto mt-3"
+              className="h-1 bg-brand rounded-full mx-auto mt-3"
               initial={{ width: 0 }}
               whileInView={{ width: "3rem" }}
               viewport={{ once: true }}
@@ -1058,7 +1058,7 @@ const Franchise = () => {
 
           {/* CEO Card */}
           <motion.div
-            className="flex flex-col md:flex-row items-center gap-10 bg-offwhite rounded-3xl border border-offwhite-dark p-8 md:p-12"
+            className="flex flex-col md:flex-row items-center gap-10 bg-cream rounded-3xl border border-cream-dark p-8 md:p-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -1072,29 +1072,29 @@ const Franchise = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-lg ring-4 ring-red-dark/10">
+              <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-lg ring-4 ring-brand/10">
                 <img
                   src={ceoBanner}
                   alt="Suraj Kumar Rai — Chairman & Managing Director, CrushBurg"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                {/* Red accent strip */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-red-dark" />
+                {/* Red gold strip */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-brand" />
               </div>
             </motion.div>
 
             {/* Info */}
             <div className="flex-1 text-center md:text-left">
-              <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2">
+              <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2">
                 Chairman &amp; Managing Director
               </p>
-              <h3 className="font-sans font-bold text-gray-900 text-3xl md:text-4xl tracking-tight mb-1">
+              <h3 className="font-sans font-bold text-ink text-3xl md:text-4xl tracking-tight mb-1">
                 Suraj Kumar Rai
               </h3>
-              <div className="w-10 h-0.5 bg-red-dark rounded-full mb-5 mx-auto md:mx-0" />
+              <div className="w-10 h-0.5 bg-brand rounded-full mb-5 mx-auto md:mx-0" />
 
-              <blockquote className="text-gray-700 text-[15px] md:text-[16px] italic leading-relaxed mb-6 border-l-4 border-red-dark/30 pl-4">
+              <blockquote className="text-ink-soft text-[15px] md:text-[16px] italic leading-relaxed mb-6 border-l-4 border-brand/30 pl-4">
                 "We are not here to compete, we are here to redefine standards."
               </blockquote>
 
@@ -1108,7 +1108,7 @@ const Franchise = () => {
                 ].map((tag) => (
                   <li
                     key={tag}
-                    className="bg-white border border-offwhite-dark text-gray-700 text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
+                    className="bg-white border border-cream-dark text-ink-soft text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
                   >
                     {tag}
                   </li>
@@ -1126,7 +1126,7 @@ const Franchise = () => {
       {/* ── Final CTA ── */}
       <section className="relative z-10 padding-responsive py-16 md:py-20 pb-24">
         <motion.div
-          className="max-w-5xl mx-auto bg-red-dark text-white rounded-2xl p-10 md:p-14 text-center relative overflow-hidden"
+          className="max-w-5xl mx-auto bg-brand text-white rounded-2xl p-10 md:p-14 text-center relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -1171,7 +1171,7 @@ const Franchise = () => {
                 href={MANUAL_LINK}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-yellow-light hover:bg-yellow-dark text-black px-7 py-3 rounded-full font-semibold text-sm shadow-lg transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark text-on-gold px-7 py-3 rounded-full font-semibold text-sm shadow-lg transition-all duration-200"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
               >

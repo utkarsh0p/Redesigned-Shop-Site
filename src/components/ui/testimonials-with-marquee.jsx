@@ -4,7 +4,7 @@ import { TestimonialCard } from "@/components/ui/testimonial-card"
 export function TestimonialsSection({ title, description, testimonials, className }) {
   return (
     <section className={cn(
-      "bg-offwhite",
+      "bg-cream",
       "py-16 sm:py-24 px-0",
       className
     )}>
@@ -12,13 +12,13 @@ export function TestimonialsSection({ title, description, testimonials, classNam
 
         {/* Header */}
         <div className="flex flex-col items-center gap-4 px-4 sm:gap-6">
-          <p className="para font-primary text-red-dark font-semibold uppercase tracking-widest text-sm">
+          <p className="para font-primary text-brand font-semibold uppercase tracking-widest text-sm">
             Happy Customers
           </p>
-          <h2 className="font-sans font-bold text-4xl sm:text-5xl text-gray-900 leading-tight max-w-[720px] uppercase tracking-tight">
+          <h2 className="font-sans font-bold text-4xl sm:text-5xl text-ink leading-tight max-w-[720px] uppercase tracking-tight">
             {title}
           </h2>
-          <p className="para font-primary text-gray-500 max-w-[560px] sm:text-base">
+          <p className="para font-primary text-muted max-w-[560px] sm:text-base">
             {description}
           </p>
         </div>
@@ -40,8 +40,8 @@ export function TestimonialsSection({ title, description, testimonials, classNam
           </div>
 
           {/* Fade edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/4 bg-gradient-to-r from-offwhite sm:block" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/4 bg-gradient-to-l from-offwhite sm:block" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/4 bg-gradient-to-r from-cream sm:block" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/4 bg-gradient-to-l from-cream sm:block" />
         </div>
 
       </div>

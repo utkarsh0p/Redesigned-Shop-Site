@@ -7,6 +7,7 @@ import {
   useMotionValue,
   useVelocity,
   useAnimationFrame,
+  useInView,
 } from "motion/react";
 
 // replaces @motionone/utils wrap
@@ -16,6 +17,11 @@ function wrap(min, max, v) {
 }
 
 function MarqueeAnimation({ children, className = "", direction = "left", baseVelocity = 10 }) {
+  const wrapperRef = useRef(null);
+  // Only run the frame loop while the marquee is actually on screen — otherwise
+  // every instance keeps a rAF alive for the whole session and competes with
+  // Lenis for the main thread.
+  const inView = useInView(wrapperRef, { margin: "200px" });
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -26,6 +32,7 @@ function MarqueeAnimation({ children, className = "", direction = "left", baseVe
 
   const directionFactor = useRef(1);
   useAnimationFrame((t, delta) => {
+    if (!inView) return;
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
     if (direction === "left") {
@@ -39,7 +46,7 @@ function MarqueeAnimation({ children, className = "", direction = "left", baseVe
   });
 
   return (
-    <div className="overflow-hidden max-w-[100vw] whitespace-nowrap flex relative">
+    <div ref={wrapperRef} className="overflow-hidden max-w-[100vw] whitespace-nowrap flex relative">
       <motion.div
         className={`font-bold uppercase text-sm md:text-xl lg:text-2xl flex flex-nowrap whitespace-nowrap [&>span]:block [&>span]:mr-8 ${className}`}
         style={{ x }}

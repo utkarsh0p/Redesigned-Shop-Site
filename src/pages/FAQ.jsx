@@ -77,18 +77,18 @@ const faqCategories = [
 ];
 
 const FAQItem = ({ question, answer, isOpen, onToggle }) => (
-  <div className="border border-gray-200 rounded-xl overflow-hidden">
+  <div className="border border-cream-dark rounded-xl overflow-hidden">
     <button
-      className="w-full text-left px-6 py-4 flex justify-between items-center gap-4 hover:bg-red-dark/5 transition-colors"
+      className="w-full text-left px-6 py-4 flex justify-between items-center gap-4 hover:bg-brand/5 transition-colors"
       onClick={onToggle}
     >
-      <span className="font-heading font-semibold text-gray-900 text-sm md:text-base leading-snug">
+      <span className="font-heading font-semibold text-ink text-sm md:text-base leading-snug">
         {question}
       </span>
       <motion.div
         animate={{ rotate: isOpen ? 180 : 0 }}
         transition={{ duration: 0.2 }}
-        className="flex-shrink-0 text-red-dark"
+        className="flex-shrink-0 text-brand"
       >
         <ChevronDown size={20} />
       </motion.div>
@@ -102,7 +102,7 @@ const FAQItem = ({ question, answer, isOpen, onToggle }) => (
           transition={{ duration: 0.25, ease: "easeInOut" }}
           className="overflow-hidden"
         >
-          <div className="px-6 pb-5 pt-1 bg-white para text-gray-600 font-primary leading-relaxed text-sm md:text-base">
+          <div className="px-6 pb-5 pt-1 bg-white para text-ink-soft font-primary leading-relaxed text-sm md:text-base">
             {answer}
           </div>
         </motion.div>
@@ -117,18 +117,18 @@ const FAQ = () => {
   const toggle = (key) => setOpenItem(openItem === key ? null : key);
 
   return (
-    <section className="bg-offwhite min-h-screen pt-28 pb-20 padding-responsive">
+    <section className="bg-cream min-h-screen pt-28 pb-20 padding-responsive">
       <div className="max-w-3xl mx-auto">
 
         {/* Heading */}
         <div className="text-center mb-12">
-          <p className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-3">
+          <p className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-3">
             Got Questions?
           </p>
-          <h1 className="heading text-red-dark font-heading font-bold text-4xl md:text-5xl mb-4">
+          <h1 className="heading text-brand font-heading font-bold text-4xl md:text-5xl mb-4">
             FAQs
           </h1>
-          <p className="para font-primary text-gray-600 max-w-xl mx-auto leading-relaxed">
+          <p className="para font-primary text-ink-soft max-w-xl mx-auto leading-relaxed">
             Everything you need to know about CrushBurg — from our menu to our franchise opportunity.
           </p>
         </div>
@@ -137,7 +137,7 @@ const FAQ = () => {
         <div className="flex flex-col gap-10">
           {faqCategories.map(({ category, items }) => (
             <div key={category}>
-              <h2 className="font-heading font-bold text-xs uppercase tracking-widest text-gray-400 mb-4 pl-1">
+              <h2 className="font-heading font-bold text-xs uppercase tracking-widest text-muted-light mb-4 pl-1">
                 {category}
               </h2>
               <div className="flex flex-col gap-3">
@@ -159,7 +159,7 @@ const FAQ = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-14 bg-red-dark rounded-2xl p-8 text-center text-white">
+        <div className="mt-14 bg-brand rounded-2xl p-8 text-center text-white">
           <p className="font-heading font-bold text-lg mb-2">Still have questions?</p>
           <p className="text-white/75 text-sm mb-5 leading-relaxed">
             Our team is happy to help — reach out via WhatsApp or visit the contact page.

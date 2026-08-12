@@ -21,7 +21,7 @@ function FloatingPaths({ position }) {
           <motion.path
             key={path.id}
             d={path.d}
-            stroke="#D32F2F"
+            stroke="#5F3425"
             strokeWidth={path.width}
             strokeOpacity={0.06 + path.id * 0.018}
             initial={{ pathLength: 0.3, opacity: 0.6 }}
@@ -43,7 +43,7 @@ function FloatingPaths({ position }) {
 }
 
 const bullets = [
-  "Freshly grilled burgers and wraps",
+  "Fresh burgers, sandwiches, wraps & more",
   "Easy franchise setup & full support",
   "Proven business growth model",
   "Strong marketing & brand presence",
@@ -55,7 +55,7 @@ const GrillToYouSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative bg-offwhite overflow-hidden h-full p-10 primary-color flex flex-col justify-center">
+    <div className="relative bg-cream overflow-hidden h-full p-10 primary-color flex flex-col justify-center">
       {/* Floating paths background */}
       <div className="absolute inset-0">
         <FloatingPaths position={1} />
@@ -68,15 +68,15 @@ const GrillToYouSection = () => {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="para font-primary text-red-dark font-semibold uppercase tracking-widest text-sm mb-3"
+          className="para font-primary text-brand font-semibold uppercase tracking-widest text-sm mb-3"
         >
           Fresh & Bold
         </motion.p>
 
         {/* Title with letter-by-letter animation */}
-        <h1 className="font-sans font-bold text-3xl md:text-4xl text-gray-900 uppercase tracking-tight leading-tight mb-4">
+        <h1 className="font-sans font-bold text-3xl md:text-4xl text-ink uppercase tracking-tight leading-tight mb-4">
           {titleWords.map((word, wordIndex) => (
             <span key={wordIndex} className="inline-block mr-2 last:mr-0">
               {word.split("").map((letter, letterIndex) => (
@@ -84,7 +84,7 @@ const GrillToYouSection = () => {
                   key={`${wordIndex}-${letterIndex}`}
                   initial={{ y: 40, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: false, amount: 0.4 }}
+                  viewport={{ once: true, amount: 0.3 }}
                   transition={{
                     delay: wordIndex * 0.08 + letterIndex * 0.03,
                     type: "spring",
@@ -104,12 +104,12 @@ const GrillToYouSection = () => {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.12 }}
           className="para mb-6"
         >
-          Join the Crushburg family and be a part of the fastest-growing burger
-          &amp; wraps brand.
+          Join the Crushburg family and be a part of the fastest-growing burger,
+          sandwich &amp; wrap brand.
         </motion.p>
 
         {/* Bullets */}
@@ -119,11 +119,11 @@ const GrillToYouSection = () => {
               key={item}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.4 }}
-              transition={{ duration: 0.4, delay: 0.55 + i * 0.1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
               className="flex items-center gap-2"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-red-dark flex-shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" />
               {item}
             </motion.li>
           ))}
@@ -133,10 +133,10 @@ const GrillToYouSection = () => {
         <motion.button
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.5, delay: 0.95 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.42 }}
           onClick={() => navigate("/franchise")}
-          className="mt-2 bg-red-dark py-2 text-white px-6 md:py-3 rounded-full font-semibold w-fit cursor-pointer para hover:bg-red-light transition-colors duration-200 shadow-md"
+          className="mt-2 bg-brand py-2 text-white px-6 md:py-3 rounded-full font-semibold w-fit cursor-pointer para hover:bg-brand-light transition-colors duration-200 shadow-md"
         >
           Apply For A Franchise
         </motion.button>

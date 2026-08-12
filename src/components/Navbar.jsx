@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { logoMain } from "../constants";
+import { logoBrown, logoCream } from "../constants";
 import { Home, Store, UtensilsCrossed, Phone, Info, Users } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import AnimeNavBar from "./AnimeNavBar";
 import SkyToggle from "./SkyToggle";
+import { useTheme } from "../context/ThemeContext";
 
 const BOTTOM_TABS = [
   { title: "Home",       to: "/",         icon: Home },
@@ -38,6 +39,8 @@ const Navbar = () => {
   const dockRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const { isDark } = useTheme();
+  const logo = isDark ? logoCream : logoBrown;
 
   // Collapse expanded tab on outside click
   useEffect(() => {
@@ -74,7 +77,7 @@ const Navbar = () => {
         animate={{ y: navVisible ? 0 : "-100%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="hidden md:flex fixed top-0 left-0 right-0 z-[9998] items-center justify-between px-8 py-3 bg-white shadow-md overflow-visible">
-        <img src={logoMain} alt="logo" className="w-24 h-auto object-contain" />
+        <img src={logo} alt="CrushBurg" className="w-24 h-auto object-contain" />
         <AnimeNavBar />
         <div className="flex items-center gap-4">
           <SkyToggle />
@@ -85,9 +88,9 @@ const Navbar = () => {
       <motion.nav
         animate={{ y: navVisible ? 0 : "-100%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-black flex items-center justify-between px-4 py-3 font-body">
+        className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-ink flex items-center justify-between px-4 py-3 font-body">
         <div className="w-20 flex-shrink-0">
-          <img src={logoMain} alt="logo" className="w-full h-auto object-contain" />
+          <img src={logo} alt="CrushBurg" className="w-full h-auto object-contain" />
         </div>
         <div className="flex items-center gap-3">
           <SkyToggle />
@@ -98,7 +101,7 @@ const Navbar = () => {
       <div className="fixed bottom-4 left-0 right-0 flex justify-center md:hidden z-50">
         <div
           ref={dockRef}
-          className="flex items-center gap-1 rounded-2xl border border-offwhite-dark bg-white p-1.5 shadow-lg"
+          className="flex items-center gap-1 rounded-2xl border border-cream-dark bg-white p-1.5 shadow-lg"
         >
           {BOTTOM_TABS.map((tab) => {
             const Icon = tab.icon;
@@ -120,8 +123,8 @@ const Navbar = () => {
                 className={[
                   "relative flex items-center rounded-xl py-2 text-sm font-semibold transition-colors duration-300",
                   isActive
-                    ? "bg-offwhite text-red-dark"
-                    : "text-gray-500 hover:bg-offwhite hover:text-red-dark",
+                    ? "bg-cream text-brand"
+                    : "text-muted hover:bg-cream hover:text-brand",
                 ].join(" ")}
               >
                 <Icon size={20} />

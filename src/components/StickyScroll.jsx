@@ -29,10 +29,10 @@ const StickyScroll = ({ content }) => {
   });
 
   const panelGradients = [
-    "linear-gradient(to bottom right, #D32F2F, #FF9800)",
-    "linear-gradient(to bottom right, #F44336, #FFCA28)",
-    "linear-gradient(to bottom right, #D32F2F, #FF9800)",
-    "linear-gradient(to bottom right, #F44336, #FFCA28)",
+    "linear-gradient(to bottom right, #5F3425, #E8A833)",
+    "linear-gradient(to bottom right, #804632, #E8A833)",
+    "linear-gradient(to bottom right, #5F3425, #E8A833)",
+    "linear-gradient(to bottom right, #804632, #E8A833)",
   ];
 
   const [panelGradient, setPanelGradient] = useState(panelGradients[0]);
@@ -53,13 +53,13 @@ const StickyScroll = ({ content }) => {
           >
             <motion.h2
               animate={{ opacity: activeCard === index ? 1 : 0.25 }}
-              className="heading font-heading font-bold text-2xl md:text-3xl text-red-dark mb-6"
+              className="heading font-heading font-bold text-2xl md:text-3xl text-brand mb-6"
             >
               {item.title}
             </motion.h2>
             <motion.div
               animate={{ opacity: activeCard === index ? 1 : 0.25 }}
-              className="para font-primary text-gray-700 leading-relaxed space-y-4"
+              className="para font-primary text-ink-soft leading-relaxed space-y-4"
             >
               {item.description}
             </motion.div>

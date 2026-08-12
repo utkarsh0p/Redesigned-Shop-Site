@@ -2,33 +2,75 @@
 
 ## Color Palette
 
-All colors are defined as CSS custom properties in `src/index.css` under `@theme`.
+The palette is **brown / cream / amber**. All colors are CSS custom properties in
+`src/index.css` under `@theme`. There is exactly one source colour set — never
+introduce a raw Tailwind palette colour (`text-gray-500`, `bg-red-600`, …) in
+new work; use a token so dark mode follows automatically.
 
-### Brand Colors
+### Brand
 
-| Token | Hex | Tailwind Class | Usage |
+| Token | Light | Dark | Usage |
 |---|---|---|---|
-| `red-dark` | `#D32F2F` | `bg-red-dark` / `text-red-dark` | Primary CTA buttons, active nav, brand highlight |
-| `red-light` | `#F44336` | `bg-red-light` / `text-red-light` | Hover states, accents, secondary highlights |
-| `yellow-light` | `#FFCA28` | `bg-yellow-light` / `text-yellow-light` | Warm highlights, badge backgrounds, star ratings |
-| `yellow-dark` | `#FF9800` | `bg-yellow-dark` / `text-yellow-dark` | Hover on yellow elements, CTA accents |
+| `brand` | `#5F3425` | `#8B5A3C` | Primary CTA buttons, active nav, prices, links |
+| `brand-light` | `#804632` | `#A66E4C` | Hover on brand |
+| `gold` | `#E8A833` | *(same)* | Badges, highlights, star ratings, eyebrow labels |
+| `gold-dark` | `#C88C24` | *(same)* | Hover on gold |
+| `on-gold` | `#3A2118` | *(same)* | **Text on a gold surface** — see note below |
 
-### Neutral / Background Colors
+### Surfaces
 
-| Token | Hex | Tailwind Class | Usage |
+| Token | Light | Dark | Usage |
 |---|---|---|---|
-| `white` | `#ffffff` | `bg-white` | Card surfaces, overlays |
-| `offwhite` | `#fdf6f0` | `bg-offwhite` | Page backgrounds, section fills |
-| `offwhite-dark` | `#e6dcd3` | `bg-offwhite-dark` | Dividers, subtle borders, hover on neutral areas |
+| `white` | `#ffffff` | `#3A2118` | Card surfaces, navbar, footer |
+| `cream` | `#E8E4E1` | `#241310` | Page background, section fills |
+| `cream-dark` | `#D6D0CA` | `#5F3425` | Borders, dividers |
+| `panel` | `#2E1A12` | *(same)* | **Always-dark** feature panels and image scrims |
 
-### Utility Colors (use sparingly, not in theme)
+### Text
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `ink` | `#3A2118` | `#E8E4E1` | Headings, primary text |
+| `ink-soft` | `#5C4A40` | `#D0C6BF` | Body copy |
+| `muted` | `#8A7A70` | `#B9A99E` | Secondary text |
+| `muted-light` | `#A89A90` | `#96867C` | Captions, disabled |
+
+### Two rules that are easy to get wrong
+
+1. **`gold` does not invert, so `ink` must not sit on it.** `text-ink` flips to
+   cream in dark mode and would land at ~1.9:1 on amber. Any solid `bg-gold`
+   surface pairs with **`text-on-gold`**.
+2. **Never use `ink` as a surface.** `bg-ink` inverts, so a dark panel built
+   from it flips light in dark mode while its `text-white` stays white. Use
+   **`bg-panel`** for a surface that must stay dark in both themes.
+
+### Utility colors (deliberate exceptions, not tokens)
 
 | Color | Usage |
 |---|---|
-| `#22c55e` (green-500) | Phone/WhatsApp CTA in footer |
-| `#16a34a` (green-600) | Hover on green phone button |
-| Black (`#000`) | Primary text |
-| Gray (`#6b7280`) | Secondary/muted text, borders |
+| `#22c55e` / `#16a34a` (green-500/600) | WhatsApp + phone CTAs, **and the vegetarian dot — green is semantically required here** |
+| `#E23744` | Zomato brand badge — third-party, never re-theme |
+| `#FC8019` | Swiggy brand badge — third-party, never re-theme |
+| `from-black/30…70` | Scrims over photography |
+
+---
+
+## Dark Mode
+
+Implemented in `src/index.css` under `.dark`, toggled by
+`src/context/ThemeContext.jsx` (adds `.dark` **and** DaisyUI's `data-theme` to
+`<html>`, persisted to `localStorage["crushburg-theme"]`), driven by the
+`SkyToggle` component in the navbar.
+
+It works purely by **re-binding the theme variables above** — there are no
+`dark:` variant classes in the codebase and there should not be. If a component
+is styled with tokens, dark mode is free; if it hardcodes a hex, it will be
+wrong in one of the two themes.
+
+> **DaisyUI name collision:** DaisyUI reserves `--color-primary`, `--color-secondary`,
+> `--color-accent`, `--color-neutral`, `--color-base-*`, `--color-info|success|warning|error`
+> and emits them *after* `@theme`. A token named `accent` is silently overridden by
+> DaisyUI's teal. This is why the amber token is called `gold`. Don't reuse those names.
 
 ---
 
@@ -96,16 +138,22 @@ Apply to all page-level sections so content is consistently inset.
 
 **Primary (SlideButton):**
 ```
-bg-red-dark → hover:bg-red-light
+bg-brand → hover:bg-brand-light
 text-white, rounded-full, font-semibold
 px-6 py-2 (small) | px-8 py-3 (large)
 ```
 
 **Secondary / Outline:**
 ```
-border-2 border-red-dark, text-red-dark
-hover: bg-red-dark text-white
+border-2 border-brand, text-brand
+hover: bg-brand text-white
 rounded-full
+```
+
+**Gold / highlight:**
+```
+bg-gold → hover:bg-gold-dark
+text-on-gold (NOT text-ink), rounded-full
 ```
 
 **Utility (e.g. WhatsApp/Phone):**
@@ -122,20 +170,20 @@ bg-white, rounded-2xl, card-shadow
 overflow-hidden
 Image top → content padding p-4
 Title: font-sub-heading, text-lg font-bold
-Price: text-red-dark font-bold
+Price: text-brand font-bold
 ```
 
 **Info Card (franchise, about):**
 ```
-bg-offwhite, rounded-2xl
-border border-offwhite-dark
+bg-cream, rounded-2xl
+border border-cream-dark
 p-6 md:p-8
 ```
 
 ### Badges / Tags
 
 ```
-bg-yellow-light text-black
+bg-gold text-on-gold
 text-xs font-semibold
 px-3 py-1 rounded-full
 ```
@@ -143,8 +191,7 @@ px-3 py-1 rounded-full
 ### Dividers
 
 ```
-border-offwhite-dark
-or a 1px line colored #e6dcd3
+border-cream-dark
 ```
 
 ---
@@ -165,7 +212,6 @@ Transformations are embedded in the URL path (not query params). Always include 
 
 | Use case | Transformations | Example export |
 |---|---|---|
-| Logo / nav icon | `w_300,f_auto,q_auto` | `logoMain`, `logoRed` |
 | Product / food card | `w_400,f_auto,q_auto` | `kingFusionBurger` |
 | Hero / banner (full-width) | `w_1100,f_auto,q_auto` | `heroBanner` |
 | Section banner / wide card | `w_800,f_auto,q_auto` | `modelImage` |
@@ -178,16 +224,36 @@ Transformations are embedded in the URL path (not query params). Always include 
 2. Export it with a descriptive camelCase name grouped under the relevant comment section (Logos, Burgers, Team / People, etc.).
 3. Import from `../constants` (or `../../constants`) in the component — never paste the raw URL into JSX.
 
-### Current logo exports
+---
 
-| Export | Description |
-|---|---|
-| `logoMain` | Primary brand logo (new, Gemini-generated) |
-| `logoRed` | Red-variant logo |
-| `logoTwo` | Transparent CB logo |
-| `navLogo` | Navbar logo (JPG) |
-| `logo` | Original mark |
-| `logoName` | Wordmark / name-only |
+## Logo
+
+The logo is the **one exception to the Cloudinary rule** — it is served from
+`public/` so it can also act as the favicon.
+
+The mark is a **single flat colour on transparency**, so it ships as two tints
+generated from the same source artwork:
+
+| Export | File | Use on |
+|---|---|---|
+| `logoBrown` | `public/logo-brown.png` | Light surfaces (`#5F3425`) |
+| `logoCream` | `public/logo-cream.png` | Dark surfaces (`#E8E4E1`) |
+
+Also in `public/`: `favicon.png` (512px, cream mark on a brown square) and
+`apple-touch-icon.png` (180px).
+
+**Always pick the variant from the theme** — a cream logo on a light navbar is
+invisible:
+
+```jsx
+const { isDark } = useTheme();          // src/context/ThemeContext.jsx
+<img src={isDark ? logoCream : logoBrown} alt="CrushBurg" />
+```
+
+Rendered in `components/Navbar.jsx` (desktop + mobile bars) and
+`components/Footer.jsx`. Source artwork lives outside the repo at
+`~/Desktop/VindhyamAssets/Crushburg/logo.png` — it has a large transparent
+margin, so re-exports must be cropped to the alpha bounding box first.
 
 ---
 
@@ -201,8 +267,8 @@ Built with **Swiper 12**.
 | Mobile slides | 2 |
 | Tablet slides | 3 |
 | Desktop slides | 4 |
-| Navigation color | `red-dark` |
-| Pagination bullets | Active: `red-dark` |
+| Navigation color | `brand` |
+| Pagination bullets | Active: `brand` |
 
 ---
 
@@ -266,7 +332,7 @@ Areas where the site can feel more professional and interactive:
 4. **Scroll-triggered section reveals** — use GSAP ScrollTrigger (already installed) for section fade-ins
 5. **Active category tabs** — highlight selected category in menu with animated underline/pill
 6. **Image zoom on hover** — `overflow-hidden` + `hover:scale-110 transition-transform` on food images
-7. **Testimonials section** — social proof with star ratings (use `yellow-light`)
+7. **Testimonials section** — social proof with star ratings (use `gold`)
 8. **Number counters** — animate stats like "10+ Stores", "50,000+ Customers" on scroll
 9. **Floating WhatsApp button** — fixed bottom-right, using green utility color
 10. **Page transitions** — smooth fade between routes using React Router + GSAP

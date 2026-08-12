@@ -27,25 +27,47 @@
   --font-heading: sub-heading-font, sans-serif;
   --font-sans: Inter, sans-serif;
 
-  /* Neutrals (Backgrounds) */
-  --color-white: #ffffff;
-  --color-offwhite: #fdf6f0;   /* softer, warmer off-white */
-  --color-offwhite-dark: #e6dcd3; /* subtle beige */
+  /* Surfaces (Backgrounds) */
+  --color-white: #ffffff;      /* card surfaces */
+  --color-cream: #E8E4E1;      /* page background */
+  --color-cream-dark: #D6D0CA; /* borders, dividers */
 
-  /* Primary Reds (Branding) */
-  --color-red-dark: #D32F2F;   /* bold, deep red */
-  --color-red-light: #F44336;  /* vibrant red for accents */
+  /* Brand (Primary actions) */
+  --color-brand: #5F3425;       /* deep roasted brown */
+  --color-brand-light: #804632; /* hover on brand */
 
-  /* Yellows/Oranges (Highlights & Buttons) */
-  --color-yellow-light: #FFCA28;  /* warm golden yellow */
-  --color-yellow-dark: #FF9800;   /* orange for hover/CTA */
+  /* Accent (Highlights) */
+  --color-gold: #E8A833;      /* golden amber */
+  --color-gold-dark: #C88C24; /* hover on gold */
+  /* Text sitting ON a gold surface. Gold does not flip between themes, so this
+     must not either — using text-ink here would go cream in dark mode and drop
+     to ~1.9:1 on amber. */
+  --color-on-gold: #3A2118;
+
+  /* Feature panels / image scrims that stay dark in BOTH themes.
+     Don't use `ink` for a surface — it inverts, which would flip the panel
+     light while the text on it stays white. */
+  --color-panel: #2E1A12;
+
+  /* Text */
+  --color-ink: #3A2118;         /* primary text */
+  --color-ink-soft: #5C4A40;    /* body copy */
+  --color-muted: #8A7A70;       /* secondary text */
+  --color-muted-light: #A89A90; /* captions, disabled */
 }
 
 
 
 @layer base{
   html, body {
-    @apply bg-offwhite;
+    @apply bg-cream text-ink;
+  }
+
+  /* Clips horizontal overflow without creating a scroll container the way
+     overflow-x: hidden does — keeps `position: sticky` (Timeline,
+     StickyScroll) anchored to the viewport. */
+  html {
+    overflow-x: clip;
   }
 
   h1,h2,h3,h5,h6{
@@ -67,13 +89,13 @@
   }
 
   .primary-color{
-    @apply text-[#7a7a7a];
+    @apply text-muted;
   }
 
   .card-shadow {
     @apply bg-white p-6;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-                rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(58, 33, 24, 0.18) 0px 2px 5px -1px,
+                rgba(58, 33, 24, 0.24) 0px 1px 3px -1px;
     transition: transform 0.3s ease;
   }
 
@@ -106,50 +128,41 @@
 }
 
 /* ── Dark mode overrides ── */
-/* Override the Tailwind theme CSS variables so every bg-white/bg-offwhite
-   class automatically picks up the dark palette — no per-component changes needed */
+/* Re-bind the same theme tokens so every bg-white / bg-cream / text-ink class
+   picks up the dark palette automatically — no `dark:` variants anywhere. */
 .dark {
-  --color-white: #1e293b;          /* cards, navbar, footer surfaces */
-  --color-offwhite: #0f172a;       /* page background */
-  --color-offwhite-dark: #334155;  /* borders, dividers */
+  /* Surfaces */
+  --color-white: #3A2118;       /* cards, navbar, footer surfaces */
+  --color-cream: #241310;       /* page background */
+  --color-cream-dark: #5F3425;  /* borders, dividers */
+
+  /* Brand — lightened so the existing text-white labels on brand
+     buttons stay legible (deep brown on deep brown would fail) */
+  --color-brand: #8B5A3C;
+  --color-brand-light: #A66E4C;
+
+  /* Accent is legible on both grounds — unchanged */
+
+  /* Text — inverted */
+  --color-ink: #E8E4E1;
+  --color-ink-soft: #D0C6BF;
+  --color-muted: #B9A99E;
+  --color-muted-light: #96867C;
+
   color-scheme: dark;
 }
 
-/* Global dark text — elements that don't carry an explicit text class inherit this */
-.dark body {
-  color: #f1f5f9;
-}
-
-/* Explicit text-black overrides (headings, labels that hardcode text-black) */
-.dark .text-black,
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6 {
-  color: #f1f5f9;
-}
-
-.dark p {
-  color: #cbd5e1;
-}
-
-/* Muted / secondary text */
-.dark .text-gray-500,
-.dark .text-gray-600,
-.dark .text-gray-700 {
-  color: #94a3b8;
-}
-
-/* Input fields */
+/* Input fields — no token equivalent, so still explicit */
 .dark input,
 .dark textarea,
 .dark select {
-  background-color: #1e293b;
-  color: #f1f5f9;
-  border-color: #334155;
+  background-color: var(--color-white);
+  color: var(--color-ink);
+  border-color: var(--color-cream-dark);
 }
 
-/* card-shadow utility uses @apply bg-white — already handled by --color-white override above */
+.dark .card-shadow {
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 5px -1px,
+              rgba(0, 0, 0, 0.55) 0px 1px 3px -1px;
+}
 

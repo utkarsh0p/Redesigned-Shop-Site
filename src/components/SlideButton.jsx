@@ -6,8 +6,8 @@ const SlideButton = ({ value, url, nav }) => {
 
   const baseClasses =
     "inline-block px-6 py-3 font-body tracking-wider " +
-    "bg-red-dark text-white rounded-full cursor-pointer transition-all duration-200 ease-in-out " +
-    "hover:bg-red-light hover:shadow-md";
+    "bg-brand text-white rounded-full cursor-pointer transition-all duration-200 ease-in-out " +
+    "hover:bg-brand-light hover:shadow-md";
 
   if (url) {
     return (

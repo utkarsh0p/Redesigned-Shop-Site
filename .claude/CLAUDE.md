@@ -92,11 +92,15 @@ src/
 See [styles.md](./styles.md) for the full design reference (colors, typography, spacing, component patterns).
 
 **Core principles:**
-- Off-white/beige backgrounds (`offwhite`) as the canvas
-- Red (`red-dark`) as the primary brand action color
-- Yellow/orange (`yellow-light`, `yellow-dark`) for highlights and hover states
+- Cream backgrounds (`cream`) as the canvas
+- Brown (`brand`) as the primary brand action color
+- Amber (`gold`, `gold-dark`) for highlights and hover states
 - Rounded pill buttons throughout
 - Mobile-first — always check mobile layout first
+- **The site has a light and a dark theme.** Both are driven entirely by
+  re-binding theme variables — style with tokens, never raw Tailwind colors
+  (`text-gray-500`, `bg-red-600`) or hardcoded hex, or one theme will break.
+  Check any change in both modes via the navbar toggle.
 
 **Custom CSS utilities (defined in index.css):**
 - `.heading` — bold heading styles
@@ -111,7 +115,8 @@ See [styles.md](./styles.md) for the full design reference (colors, typography, 
 All product data and image URLs live in `src/constants/index.js`. This is the single source of truth for:
 - `navLinks` — navigation items
 - `products` — full menu with categories, names, descriptions, prices, images
-- All Cloudinary asset URLs (logos, banners, product images, store photos)
+- All Cloudinary asset URLs (banners, product images, store photos)
+- `logoBrown` / `logoCream` — the logo, served locally from `public/` (see styles.md)
 
 **Never hardcode product data or image URLs in components.** Always reference `constants/index.js`.
 
@@ -120,7 +125,8 @@ All product data and image URLs live in `src/constants/index.js`. This is the si
 ## Important Constraints
 
 - Do not add meat or non-vegetarian products — CrushBurg is 100% vegetarian
-- Keep the red + off-white + yellow brand palette — do not introduce new base colors without updating `styles.md`
+- Keep the brown + cream + amber brand palette — do not introduce new base colors without updating `styles.md`
+- Do not name a theme token `primary`, `secondary`, `accent`, `neutral`, `base-*`, `info`, `success`, `warning` or `error` — DaisyUI reserves those and silently overrides them
 - EmailJS credentials are in the Contacts page — do not move them to env without updating the integration
 - Fonts are loaded from Cloudinary URLs in `index.css` — do not change font sources
 - DaisyUI is installed but use it selectively — prefer custom Tailwind classes to keep brand consistency

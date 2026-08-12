@@ -28,7 +28,7 @@ export function AnimeNavBar() {
 
   return (
     <motion.div
-      className="flex items-center gap-1 bg-red-dark border border-red-light/30 py-1.5 px-2 rounded-full shadow-lg"
+      className="flex items-center gap-1 bg-brand border border-brand-light/30 py-1.5 px-2 rounded-full shadow-lg"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -58,12 +58,12 @@ export function AnimeNavBar() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <div className="absolute inset-0 bg-yellow-light/20 rounded-full blur-md" />
-                  <div className="absolute inset-[-4px] bg-yellow-light/15 rounded-full blur-xl" />
-                  <div className="absolute inset-[-8px] bg-yellow-dark/10 rounded-full blur-2xl" />
+                  <div className="absolute inset-0 bg-gold/20 rounded-full blur-md" />
+                  <div className="absolute inset-[-4px] bg-gold/15 rounded-full blur-xl" />
+                  <div className="absolute inset-[-8px] bg-gold-dark/10 rounded-full blur-2xl" />
                   {/* Shine sweep */}
                   <div
-                    className="absolute inset-0 bg-gradient-to-r from-yellow-light/0 via-yellow-light/20 to-yellow-light/0"
+                    className="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/20 to-gold/0"
                     style={{ animation: "shine 3s ease-in-out infinite" }}
                   />
                 </motion.div>
@@ -97,7 +97,7 @@ export function AnimeNavBar() {
                       : { opacity: 1, scale: 1, y: [0, -3, 0], transition: { y: { duration: 0.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.3 } } }
                   }
                 >
-                  <div className="w-full h-full bg-white rotate-45 transform origin-center shadow-sm" style={{ border: "1.5px solid #e6dcd3" }} />
+                  <div className="w-full h-full bg-white rotate-45 transform origin-center shadow-sm" style={{ border: "1.5px solid #D6D0CA" }} />
                 </motion.div>
               )}
             </AnimatePresence>

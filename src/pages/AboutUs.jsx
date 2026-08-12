@@ -31,7 +31,7 @@ const services = [
   {
     icon: <Flame className="w-6 h-6" />,
     secondaryIcon: (
-      <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-yellow-light" />
+      <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-gold" />
     ),
     title: "Signature Burgers",
     description:
@@ -41,7 +41,7 @@ const services = [
   {
     icon: <Utensils className="w-6 h-6" />,
     secondaryIcon: (
-      <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-yellow-light" />
+      <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-gold" />
     ),
     title: "Wraps & Sandwiches",
     description:
@@ -51,7 +51,7 @@ const services = [
   {
     icon: <Coffee className="w-6 h-6" />,
     secondaryIcon: (
-      <Star className="w-4 h-4 absolute -top-1 -right-1 text-yellow-light" />
+      <Star className="w-4 h-4 absolute -top-1 -right-1 text-gold" />
     ),
     title: "Fries & Beverages",
     description:
@@ -61,7 +61,7 @@ const services = [
   {
     icon: <Leaf className="w-6 h-6" />,
     secondaryIcon: (
-      <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-yellow-light" />
+      <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-gold" />
     ),
     title: "100% Vegetarian",
     description:
@@ -71,7 +71,7 @@ const services = [
   {
     icon: <Heart className="w-6 h-6" />,
     secondaryIcon: (
-      <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-yellow-light" />
+      <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-gold" />
     ),
     title: "Fresh Every Day",
     description:
@@ -81,7 +81,7 @@ const services = [
   {
     icon: <Building2 className="w-6 h-6" />,
     secondaryIcon: (
-      <Star className="w-4 h-4 absolute -top-1 -right-1 text-yellow-light" />
+      <Star className="w-4 h-4 absolute -top-1 -right-1 text-gold" />
     ),
     title: "Grow With Us",
     description:
@@ -114,18 +114,18 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
         transition={{ duration: 0.6, delay: delay + 0.2 }}
       >
         <motion.div
-          className="text-red-dark bg-red-dark/10 p-3 rounded-lg transition-colors duration-300 group-hover:bg-red-dark/20 relative"
+          className="text-brand bg-brand/10 p-3 rounded-lg transition-colors duration-300 group-hover:bg-brand/20 relative"
           whileHover={{ rotate: [0, -10, 10, -5, 0], transition: { duration: 0.5 } }}
         >
           {icon}
           {secondaryIcon}
         </motion.div>
-        <h3 className="text-xl font-medium text-gray-900 group-hover:text-red-dark transition-colors duration-300 font-sub-heading">
+        <h3 className="text-xl font-medium text-ink group-hover:text-brand transition-colors duration-300 font-sub-heading">
           {title}
         </h3>
       </motion.div>
       <motion.p
-        className="text-sm text-gray-600 leading-relaxed pl-12"
+        className="text-sm text-ink-soft leading-relaxed pl-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: delay + 0.4 }}
@@ -133,7 +133,7 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
         {description}
       </motion.p>
       <motion.div
-        className="mt-3 pl-12 flex items-center text-red-dark text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="mt-3 pl-12 flex items-center text-brand text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0 }}
       >
@@ -174,17 +174,17 @@ function StatCounter({ icon, value, label, suffix, delay }) {
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
     >
       <motion.div
-        className="w-14 h-14 rounded-full bg-red-dark/5 flex items-center justify-center mb-4 text-red-dark group-hover:bg-red-dark/10 transition-colors duration-300"
+        className="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center mb-4 text-brand group-hover:bg-brand/10 transition-colors duration-300"
         whileHover={{ rotate: 360, transition: { duration: 0.8 } }}
       >
         {icon}
       </motion.div>
-      <motion.div ref={countRef} className="text-3xl font-bold text-gray-900 flex items-center font-heading">
+      <motion.div ref={countRef} className="text-3xl font-bold text-ink flex items-center font-heading">
         <motion.span>{displayValue}</motion.span>
         <span>{suffix}</span>
       </motion.div>
-      <p className="text-gray-500 text-sm mt-1">{label}</p>
-      <motion.div className="w-10 h-0.5 bg-red-dark mt-3 group-hover:w-16 transition-all duration-300" />
+      <p className="text-muted text-sm mt-1">{label}</p>
+      <motion.div className="w-10 h-0.5 bg-brand mt-3 group-hover:w-16 transition-all duration-300" />
     </motion.div>
   );
 }
@@ -224,24 +224,24 @@ const AboutUs = () => {
     <section
       id="about-section"
       ref={sectionRef}
-      className="w-full pt-28 pb-24 px-4 md:py-24 bg-gradient-to-b from-offwhite to-white text-gray-900 overflow-hidden relative"
+      className="w-full pt-28 pb-24 px-4 md:py-24 bg-gradient-to-b from-cream to-white text-ink overflow-hidden relative"
     >
       {/* Decorative background blobs */}
       <motion.div
-        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-red-dark/5 blur-3xl pointer-events-none"
+        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-brand/5 blur-3xl pointer-events-none"
         style={{ y: y1, rotate: rotate1 }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-yellow-light/10 blur-3xl pointer-events-none"
+        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gold/10 blur-3xl pointer-events-none"
         style={{ y: y2, rotate: rotate2 }}
       />
       <motion.div
-        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-red-dark/30 pointer-events-none"
+        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-brand/30 pointer-events-none"
         animate={{ y: [0, -15, 0], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-yellow-light/40 pointer-events-none"
+        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-gold/40 pointer-events-none"
         animate={{ y: [0, 20, 0], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
@@ -255,7 +255,7 @@ const AboutUs = () => {
         {/* Header */}
         <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
           <motion.span
-            className="inline-flex items-center gap-2 text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-4"
+            className="inline-flex items-center gap-2 text-brand font-semibold uppercase tracking-widest text-[11px] mb-4"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -263,11 +263,11 @@ const AboutUs = () => {
             <Zap className="w-3.5 h-3.5" />
             Discover Our Story
           </motion.span>
-          <h2 className="heading font-sans font-bold text-gray-900 uppercase tracking-tight mb-4 text-center">
-            About <span className="text-red-dark">CrushBurg</span>
+          <h2 className="heading font-sans font-bold text-ink uppercase tracking-tight mb-4 text-center">
+            About <span className="text-brand">CrushBurg</span>
           </h2>
           <motion.div
-            className="h-1 bg-red-dark rounded-full"
+            className="h-1 bg-brand rounded-full"
             initial={{ width: 0 }}
             animate={{ width: 96 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -275,7 +275,7 @@ const AboutUs = () => {
         </motion.div>
 
         <motion.p
-          className="text-center max-w-2xl mx-auto mb-16 text-gray-600 leading-relaxed"
+          className="text-center max-w-2xl mx-auto mb-16 text-ink-soft leading-relaxed"
           variants={itemVariants}
         >
           At CrushBurg, we believe in serving more than just food — we serve experiences. From fresh
@@ -326,7 +326,7 @@ const AboutUs = () => {
                 >
                   <Link to="/menu">
                     <motion.span
-                      className="bg-white text-gray-900 px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold cursor-pointer"
+                      className="bg-white text-ink px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold cursor-pointer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -338,34 +338,34 @@ const AboutUs = () => {
 
               {/* Offset border frame */}
               <motion.div
-                className="absolute inset-0 border-4 border-yellow-light rounded-2xl -m-3 z-[-1]"
+                className="absolute inset-0 border-4 border-gold rounded-2xl -m-3 z-[-1]"
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               />
 
-              {/* Floating accent circles */}
+              {/* Floating gold circles */}
               <motion.div
-                className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-red-dark/10 pointer-events-none"
+                className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-brand/10 pointer-events-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.9 }}
                 style={{ y: y1 }}
               />
               <motion.div
-                className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-yellow-light/20 pointer-events-none"
+                className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-gold/20 pointer-events-none"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.1 }}
                 style={{ y: y2 }}
               />
               <motion.div
-                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-dark pointer-events-none"
+                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-brand pointer-events-none"
                 animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
-                className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-yellow-light pointer-events-none"
+                className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-gold pointer-events-none"
                 animate={{ y: [0, 10, 0], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               />
@@ -413,7 +413,7 @@ const AboutUs = () => {
 
         {/* CTA banner */}
         <motion.div
-          className="mt-16 bg-red-dark text-white p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6"
+          className="mt-16 bg-brand text-white p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6"
           initial={{ opacity: 0, y: 30 }}
           animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -429,7 +429,7 @@ const AboutUs = () => {
           <div className="flex gap-3 flex-wrap justify-center">
             <Link to="/store">
               <motion.span
-                className="bg-white text-red-dark px-6 py-3 rounded-full flex items-center gap-2 font-semibold text-sm cursor-pointer hover:bg-offwhite transition-colors"
+                className="bg-white text-brand px-6 py-3 rounded-full flex items-center gap-2 font-semibold text-sm cursor-pointer hover:bg-cream transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -438,7 +438,7 @@ const AboutUs = () => {
             </Link>
             <Link to="/franchise">
               <motion.span
-                className="bg-yellow-light text-black px-6 py-3 rounded-full flex items-center gap-2 font-semibold text-sm cursor-pointer hover:bg-yellow-dark transition-colors"
+                className="bg-gold text-on-gold px-6 py-3 rounded-full flex items-center gap-2 font-semibold text-sm cursor-pointer hover:bg-gold-dark transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

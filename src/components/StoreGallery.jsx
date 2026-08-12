@@ -49,7 +49,7 @@ const Photo = ({ src, alt, direction, width, height }) => {
       draggable={false}
       tabIndex={0}
     >
-      <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-lg border-[3px] border-red-dark">
+      <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-lg border-[3px] border-brand">
         <img
           src={src}
           alt={alt}
@@ -113,17 +113,17 @@ const StoreGallery = ({ onLocateClick }) => {
   const photos = isMobile ? mobilePhotos : allPhotos;
 
   return (
-    <div className="w-full py-10 md:py-16 bg-offwhite">
+    <div className="w-full py-10 md:py-16 bg-cream">
       {/* Heading */}
       <div className="flex flex-col items-center text-center padding-responsive mb-2">
-        <p className="font-primary text-red-dark font-semibold uppercase tracking-widest text-xs md:text-sm mb-2">
+        <p className="font-primary text-brand font-semibold uppercase tracking-widest text-xs md:text-sm mb-2">
           Our Stores
         </p>
-        <h1 className="heading font-heading font-bold text-3xl md:text-5xl text-gray-900 max-w-xl">
+        <h1 className="heading font-heading font-bold text-3xl md:text-5xl text-ink max-w-xl">
           Where Every Bite{" "}
-          <span className="text-red-dark">Begins</span>
+          <span className="text-brand">Begins</span>
         </h1>
-        <p className="para font-primary text-gray-500 mt-3 max-w-md">
+        <p className="para font-primary text-muted mt-3 max-w-md">
           Step in, sit down, and let us crush your hunger — find a CrushBurg near you.
         </p>
       </div>
@@ -171,7 +171,7 @@ const StoreGallery = ({ onLocateClick }) => {
       <div className="flex justify-center mt-4">
         <button
           onClick={onLocateClick}
-          className="bg-red-dark text-white px-7 py-2.5 rounded-full font-semibold para font-primary hover:bg-red-light transition-colors duration-200 shadow-md"
+          className="bg-brand text-white px-7 py-2.5 rounded-full font-semibold para font-primary hover:bg-brand-light transition-colors duration-200 shadow-md"
         >
           Locate Nearby Stores →
         </button>

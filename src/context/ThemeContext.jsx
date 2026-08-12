@@ -9,13 +9,11 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (isDark) {
-      root.classList.add("dark");
-      localStorage.setItem("crushburg-theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("crushburg-theme", "light");
-    }
+    root.classList.toggle("dark", isDark);
+    // Keep DaisyUI's data-theme in sync — index.html hardcodes it, so without
+    // this DaisyUI components stay light while the rest of the site goes dark.
+    root.setAttribute("data-theme", isDark ? "dark" : "light");
+    localStorage.setItem("crushburg-theme", isDark ? "dark" : "light");
   }, [isDark]);
 
   const toggleTheme = () => setIsDark((prev) => !prev);

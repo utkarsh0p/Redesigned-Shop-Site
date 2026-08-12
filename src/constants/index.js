@@ -22,24 +22,11 @@ export const heroBanner =
   "https://res.cloudinary.com/dff30apwl/image/upload/w_1100,f_auto,q_auto/v1757327291/hero-bg-banner_rax1wy.png";
 
 // Logos
+// Served from public/ — the mark is a single flat colour, so it ships as two
+// tints. Pick by theme: brown on light surfaces, cream on dark ones.
 
-export const logoMain =
-  "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_auto,q_auto/v1780473408/Gemini_Generated_Image_j1hoklj1hoklj1ho_1_c8cinq.png";
-
-export const logoRed =
-  "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_png,q_auto/v1757423334/download_bdveg9.png";
-
-export const logoTwo =
-  "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_auto,q_auto/v1757098033/CB_Logo_Transparent_rgv2df.png";
-
-export const navLogo =
-  "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_auto,q_auto/v1758054996/main-logo_ejp6zq.jpg";
-
-export const logo =
-  "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_auto,q_auto/v1757097853/ASERR_rcppln.png";
-
-export const logoName =
-  "https://res.cloudinary.com/dff30apwl/image/upload/w_300,f_auto,q_auto/v1757098718/CrushBurg_Name_ai_1_mrjnq4.png";
+export const logoBrown = "/logo-brown.png";
+export const logoCream = "/logo-cream.png";
 
 // Menus
 export const menuOne =

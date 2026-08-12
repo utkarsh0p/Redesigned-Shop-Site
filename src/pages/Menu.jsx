@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "motion/react";
 import { Link } from "react-router-dom";
+import { useLenis } from "lenis/react";
 import { ArrowRight } from "lucide-react";
 import { MarqueeAnimation } from "../components/MarqueeAnimation.jsx";
 import {
@@ -124,7 +125,7 @@ function PhotoCard({ item }) {
       className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group cursor-default"
     >
       {/* Image */}
-      <div className="relative h-44 md:h-48 overflow-hidden bg-offwhite-dark">
+      <div className="relative h-44 md:h-48 overflow-hidden bg-cream-dark">
         {img && (
           <img
             src={img}
@@ -138,7 +139,7 @@ function PhotoCard({ item }) {
         </div>
         {/* Price badge */}
         <div className="absolute top-2 right-2">
-          <span className="bg-yellow-light text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+          <span className="bg-gold text-on-gold text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
             {price.type === "range" ? `from ${price.s}` : price.value}
           </span>
         </div>
@@ -148,21 +149,21 @@ function PhotoCard({ item }) {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="font-semibold text-gray-900 text-sm md:text-[15px] leading-snug mb-2 line-clamp-2">
+        <h3 className="font-semibold text-ink text-sm md:text-[15px] leading-snug mb-2 line-clamp-2">
           {item.name}
         </h3>
         {price.type === "range" ? (
           <div className="flex items-center gap-2 text-[13px]">
-            <span className="text-gray-500">
-              S: <span className="text-red-dark font-bold">{price.s}</span>
+            <span className="text-muted">
+              S: <span className="text-brand font-bold">{price.s}</span>
             </span>
-            <span className="text-offwhite-dark select-none">|</span>
-            <span className="text-gray-500">
-              L: <span className="text-red-dark font-bold">{price.l}</span>
+            <span className="text-cream-dark select-none">|</span>
+            <span className="text-muted">
+              L: <span className="text-brand font-bold">{price.l}</span>
             </span>
           </div>
         ) : (
-          <p className="text-red-dark font-bold text-sm">{price.value}</p>
+          <p className="text-brand font-bold text-sm">{price.value}</p>
         )}
       </div>
     </motion.div>
@@ -206,23 +207,23 @@ function ListGrid({ items }) {
           <motion.div
             key={item.name}
             variants={rowVariants}
-            className="flex items-center justify-between bg-white/70 hover:bg-white px-5 py-4 rounded-xl border border-offwhite-dark hover:border-red-dark/20 hover:shadow-sm transition-all duration-200 group"
+            className="flex items-center justify-between bg-white/70 hover:bg-white px-5 py-4 rounded-xl border border-cream-dark hover:border-brand/20 hover:shadow-sm transition-all duration-200 group"
           >
             <div className="flex items-center gap-3 min-w-0">
               <VegDot />
-              <span className="font-medium text-gray-800 text-sm md:text-[15px] truncate">
+              <span className="font-medium text-ink text-sm md:text-[15px] truncate">
                 {item.name}
               </span>
             </div>
             <div className="flex-shrink-0 ml-4 text-right">
               {price.type === "range" ? (
                 <div className="flex items-center gap-1.5 text-sm">
-                  <span className="text-gray-500">{price.s}</span>
-                  <span className="text-offwhite-dark">–</span>
-                  <span className="text-red-dark font-semibold">{price.l}</span>
+                  <span className="text-muted">{price.s}</span>
+                  <span className="text-cream-dark">–</span>
+                  <span className="text-brand font-semibold">{price.l}</span>
                 </div>
               ) : (
-                <span className="text-red-dark font-semibold text-sm">{price.value}</span>
+                <span className="text-brand font-semibold text-sm">{price.value}</span>
               )}
             </div>
           </motion.div>
@@ -236,7 +237,7 @@ function SectionHeader({ label, emoji }) {
   return (
     <div className="mb-8 md:mb-10">
       <motion.p
-        className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-2"
+        className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-2"
         initial={{ opacity: 0, y: -8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -245,7 +246,7 @@ function SectionHeader({ label, emoji }) {
         {emoji}&nbsp;&nbsp;CrushBurg
       </motion.p>
       <motion.h2
-        className="heading font-sans font-bold text-gray-900 uppercase tracking-tight"
+        className="heading font-sans font-bold text-ink uppercase tracking-tight"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -254,7 +255,7 @@ function SectionHeader({ label, emoji }) {
         {label}
       </motion.h2>
       <motion.div
-        className="h-1 bg-red-dark rounded-full mt-3"
+        className="h-1 bg-brand rounded-full mt-3"
         initial={{ width: 0 }}
         whileInView={{ width: "3rem" }}
         viewport={{ once: true }}
@@ -270,6 +271,7 @@ const Menu = () => {
   const [activeCategory, setActiveCategory] = useState("burgers");
   const sectionRefs = useRef({});
   const tabsRef = useRef(null);
+  const lenis = useLenis();
 
   const getSectionRef = (id) => (el) => {
     sectionRefs.current[id] = el;
@@ -311,23 +313,29 @@ const Menu = () => {
   const scrollToSection = (id) => {
     const el = sectionRefs.current[id];
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 120;
-    window.scrollTo({ top, behavior: "smooth" });
+    // Route through Lenis so it owns the animation; a native smooth scroll
+    // fights the wheel handler and stutters mid-flight.
+    if (lenis) {
+      lenis.scrollTo(el, { offset: -120, duration: 0.9 });
+    } else {
+      const top = el.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
     setActiveCategory(id);
   };
 
   return (
-    <div className="min-h-screen bg-offwhite relative overflow-x-hidden">
+    <div className="min-h-screen bg-cream relative overflow-x-hidden">
       {/* Decorative background blobs */}
-      <div className="absolute top-0 left-0 w-72 h-72 rounded-full bg-red-dark/5 blur-3xl pointer-events-none -translate-x-1/2" />
-      <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-yellow-light/10 blur-3xl pointer-events-none translate-x-1/3" />
+      <div className="absolute top-0 left-0 w-72 h-72 rounded-full bg-brand/5 blur-3xl pointer-events-none -translate-x-1/2" />
+      <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-gold/10 blur-3xl pointer-events-none translate-x-1/3" />
       <motion.div
-        className="absolute top-1/3 left-1/4 w-4 h-4 rounded-full bg-red-dark/25 pointer-events-none"
+        className="absolute top-1/3 left-1/4 w-4 h-4 rounded-full bg-brand/25 pointer-events-none"
         animate={{ y: [0, -18, 0], opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-2/3 right-1/3 w-5 h-5 rounded-full bg-yellow-light/50 pointer-events-none"
+        className="absolute top-2/3 right-1/3 w-5 h-5 rounded-full bg-gold/50 pointer-events-none"
         animate={{ y: [0, 20, 0], opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
@@ -335,7 +343,7 @@ const Menu = () => {
       {/* ── Hero ── */}
       <section className="relative z-10 padding-responsive pt-28 pb-10 md:pt-20 md:pb-12 text-center">
         <motion.p
-          className="text-red-dark font-semibold uppercase tracking-widest text-[11px] mb-3"
+          className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-3"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -343,15 +351,15 @@ const Menu = () => {
           100% Vegetarian &nbsp;•&nbsp; Always Fresh
         </motion.p>
         <motion.h1
-          className="heading font-sans font-bold text-gray-900 uppercase tracking-tight mb-4"
+          className="heading font-sans font-bold text-ink uppercase tracking-tight mb-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Our <span className="text-red-dark">Menu</span>
+          Our <span className="text-brand">Menu</span>
         </motion.h1>
         <motion.p
-          className="para text-gray-600 max-w-xl mx-auto mb-7"
+          className="para text-ink-soft max-w-xl mx-auto mb-7"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -368,7 +376,7 @@ const Menu = () => {
           {["100% Veg", "Fresh Daily", "Bold Flavors", "Starting ₹39"].map((tag) => (
             <span
               key={tag}
-              className="bg-yellow-light text-black px-4 py-1.5 rounded-full font-semibold text-xs"
+              className="bg-gold text-on-gold px-4 py-1.5 rounded-full font-semibold text-xs"
             >
               {tag}
             </span>
@@ -381,7 +389,7 @@ const Menu = () => {
         <MarqueeAnimation
           direction="left"
           baseVelocity={0.45}
-          className="text-white bg-red-dark py-2 tracking-widest"
+          className="text-white bg-brand py-2 tracking-widest"
         >
           BURGERS &nbsp;•&nbsp; WRAPS &nbsp;•&nbsp; SANDWICHES &nbsp;•&nbsp; FRIES &nbsp;•&nbsp;
           SHAKES &nbsp;•&nbsp; COLD COFFEE &nbsp;•&nbsp; SOFTIES &nbsp;•&nbsp;
@@ -389,7 +397,7 @@ const Menu = () => {
         <MarqueeAnimation
           direction="right"
           baseVelocity={0.45}
-          className="text-black bg-yellow-light py-2 tracking-widest"
+          className="text-on-gold bg-gold py-2 tracking-widest"
         >
           CRUSHBURG &nbsp;•&nbsp; 100% VEG &nbsp;•&nbsp; ALWAYS FRESH &nbsp;•&nbsp; LUCKNOW
           &nbsp;•&nbsp; BOLD FLAVORS &nbsp;•&nbsp; MADE WITH LOVE &nbsp;•&nbsp;
@@ -397,7 +405,7 @@ const Menu = () => {
       </div>
 
       {/* ── Sticky Category Tabs ── */}
-      <div className="sticky top-0 z-30 bg-offwhite/95 backdrop-blur-md border-b border-offwhite-dark shadow-sm">
+      <div className="sticky top-0 z-30 bg-cream/95 backdrop-blur-md border-b border-cream-dark shadow-sm">
         <div
           ref={tabsRef}
           className="flex items-center gap-2 overflow-x-auto scrollbar-hide padding-responsive py-3"
@@ -409,8 +417,8 @@ const Menu = () => {
               onClick={() => scrollToSection(id)}
               className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 ${
                 activeCategory === id
-                  ? "bg-red-dark text-white shadow-md scale-[1.03]"
-                  : "bg-white text-gray-600 border border-offwhite-dark hover:border-red-dark/30 hover:text-red-dark"
+                  ? "bg-brand text-white shadow-md scale-[1.03]"
+                  : "bg-white text-ink-soft border border-cream-dark hover:border-brand/30 hover:text-brand"
               }`}
             >
               <span className="text-sm">{emoji}</span>
@@ -481,7 +489,7 @@ const Menu = () => {
       {/* ── Bottom CTA ── */}
       <div className="padding-responsive pb-20 max-w-7xl mx-auto">
         <motion.div
-          className="bg-red-dark text-white p-8 md:p-10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6"
+          className="bg-brand text-white p-8 md:p-10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -498,7 +506,7 @@ const Menu = () => {
           <div className="flex gap-3 flex-wrap justify-center">
             <Link to="/store">
               <motion.span
-                className="bg-white text-red-dark px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 cursor-pointer hover:bg-offwhite transition-colors"
+                className="bg-white text-brand px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 cursor-pointer hover:bg-cream transition-colors"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
               >
@@ -507,7 +515,7 @@ const Menu = () => {
             </Link>
             <Link to="/franchise">
               <motion.span
-                className="bg-yellow-light text-black px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 cursor-pointer hover:bg-yellow-dark transition-colors"
+                className="bg-gold text-on-gold px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 cursor-pointer hover:bg-gold-dark transition-colors"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
               >
