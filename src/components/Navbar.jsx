@@ -119,11 +119,25 @@ const Navbar = () => {
           this bar on top of that made the theme toggle visibly bounce. Mobile
           navigation lives in the bottom dock anyway, so the bar just stays put. */}
       <nav
-        className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-ink flex items-center justify-between px-4 py-3 pt-[calc(0.75rem_+_env(safe-area-inset-top))] font-body">
+        className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-ink flex items-center px-4 py-3 pt-[calc(0.75rem_+_env(safe-area-inset-top))] font-body">
+        {/* Three zones with flex-1 sides, so the logo sits dead centre even
+            though the CTA (~89px) and the toggle (90px) differ in width.
+            Keep this label short — the left zone is only ~104px at 320px, and
+            anything wider shoves the centred logo sideways. */}
+        <div className="flex-1 flex justify-start">
+          <Link
+            to="/franchise"
+            className="inline-flex items-center justify-center min-h-11 px-3 rounded-full bg-brand text-white text-xs font-semibold hover:bg-brand-light transition-colors"
+          >
+            Franchise
+          </Link>
+        </div>
+
         <Link to="/" aria-label="CrushBurg home" className="w-20 flex-shrink-0">
           <img src={logo} alt="CrushBurg" className="w-full h-auto object-contain" />
         </Link>
-        <div className="flex items-center gap-3">
+
+        <div className="flex-1 flex justify-end items-center">
           <SkyToggle />
         </div>
       </nav>
