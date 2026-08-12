@@ -1,8 +1,17 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { FLOATING_PATH_COUNT } from "../lib/floatingPaths";
 
 function FloatingPaths({ position }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
+  const ref = useRef(null);
+  // See MinimalistHero — pathLength/pathOffset are main-thread work, so these
+  // only animate while on screen to keep the fixed navbar and dock smooth.
+  const inView = useInView(ref, { margin: "150px" });
+  const reduceMotion = useReducedMotion();
+  const animating = inView && !reduceMotion;
+
+  const paths = Array.from({ length: FLOATING_PATH_COUNT }, (_, i) => ({
     id: i,
     d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
       380 - i * 5 * position
@@ -15,7 +24,7 @@ function FloatingPaths({ position }) {
   }));
 
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div ref={ref} className="absolute inset-0 pointer-events-none">
       <svg className="w-full h-full" viewBox="0 0 696 316" fill="none">
         {paths.map((path) => (
           <motion.path
@@ -25,16 +34,20 @@ function FloatingPaths({ position }) {
             strokeWidth={path.width}
             strokeOpacity={0.06 + path.id * 0.018}
             initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + (path.id % 7) * 3,
-              repeat: Infinity,
-              ease: "linear",
-            }}
+            animate={
+              animating
+                ? { pathLength: 1, opacity: [0.3, 0.6, 0.3], pathOffset: [0, 1, 0] }
+                : { pathLength: 1, opacity: 0.45 }
+            }
+            transition={
+              animating
+                ? {
+                    duration: 20 + (path.id % 7) * 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }
+                : { duration: 0 }
+            }
           />
         ))}
       </svg>

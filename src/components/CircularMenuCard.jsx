@@ -8,12 +8,19 @@ import React, {
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+// How far the two peeking side cards sit from the active one.
+//
+// This used to return a flat 68px for anything narrower than 1024px, which is
+// fine on a laptop but not on a phone: the cards are `w-full`, so at a ~330px
+// container a side card's right edge lands at 0.925*W + 68 — roughly 43px past
+// the container and off the side of the screen. Below the desktop breakpoint the
+// offset now scales with the container so the peek stays inside it.
 function calculateGap(width) {
   const minWidth = 1024;
   const maxWidth = 1456;
   const minGap = 68;
   const maxGap = 94;
-  if (width <= minWidth) return minGap;
+  if (width <= minWidth) return Math.max(18, Math.min(minGap, width * 0.11));
   if (width >= maxWidth) return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
   return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
 }
@@ -103,7 +110,11 @@ const CircularMenuCard = ({ items, autoplay = true }) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-6">
+    // overflow-x-clip: the peeking side cards are transformed sideways, so this
+    // backstops any spill past the viewport (which widens the page and drags the
+    // fixed navbar/dock with it). Not `hidden` — that would create a scroll
+    // container and break the sticky elements elsewhere on the page.
+    <div className="w-full max-w-4xl mx-auto px-4 py-6 overflow-x-clip">
       <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-center">
 
         {/* Images */}
@@ -123,8 +134,14 @@ const CircularMenuCard = ({ items, autoplay = true }) => {
           ))}
         </div>
 
-        {/* Content */}
-        <div className="flex flex-col justify-between min-h-[280px]">
+        {/* Content
+            min-h reserves the tallest slide. Autoplay swaps a 177–222 char
+            description every 2s, so the block wrapped to 4 lines or 5 depending
+            on the item, and `AnimatePresence mode="wait"` unmounts it entirely
+            for the 0.3s crossover. Both changed the section height, which
+            reflowed the page on a 2s cycle and made the fixed dock and navbar
+            jump. Reserving the space keeps the height constant. */}
+        <div className="flex flex-col justify-between min-h-[330px] md:min-h-[320px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -151,7 +168,7 @@ const CircularMenuCard = ({ items, autoplay = true }) => {
               </p>
 
               {/* Description — word-by-word blur-in */}
-              <motion.p className="para font-primary text-ink-soft leading-relaxed mt-2">
+              <motion.p className="para font-primary text-ink-soft leading-relaxed mt-2 min-h-[140px] md:min-h-[132px]">
                 {active.description.split(" ").map((word, i) => (
                   <motion.span
                     key={i}

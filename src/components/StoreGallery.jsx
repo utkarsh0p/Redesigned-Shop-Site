@@ -112,8 +112,12 @@ const StoreGallery = ({ onLocateClick }) => {
 
   const photos = isMobile ? mobilePhotos : allPhotos;
 
+  // overflow-x-clip below: the photo fan is deliberately overflow-visible so the
+  // cards can spread past their 220px box — on a narrow phone that spill ran
+  // off-screen and widened the page, which drags the fixed bottom dock with it.
+  // Clipping x (not hidden, which would create a scroll container) keeps the fan.
   return (
-    <div className="w-full py-10 md:py-16 bg-cream">
+    <div className="w-full py-10 md:py-16 bg-cream overflow-x-clip">
       {/* Heading */}
       <div className="flex flex-col items-center text-center padding-responsive mb-2">
         <p className="font-primary text-brand font-semibold uppercase tracking-widest text-xs md:text-sm mb-2">

@@ -1,8 +1,18 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { FLOATING_PATH_COUNT } from "../lib/floatingPaths";
 
 function FloatingPaths({ position }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
+  const ref = useRef(null);
+  // These animate pathLength/pathOffset, which are stroke geometry — the
+  // compositor can't handle them, so every visible path costs main-thread work
+  // each frame. Lenis drives scroll from that same thread, so leaving them all
+  // running made the fixed navbar and dock stutter. Only animate on screen.
+  const inView = useInView(ref, { margin: "150px" });
+  const reduceMotion = useReducedMotion();
+  const animating = inView && !reduceMotion;
+
+  const paths = Array.from({ length: FLOATING_PATH_COUNT }, (_, i) => ({
     id: i,
     d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
       380 - i * 5 * position
@@ -15,7 +25,7 @@ function FloatingPaths({ position }) {
   }));
 
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div ref={ref} className="absolute inset-0 pointer-events-none">
       <svg className="w-full h-full" viewBox="0 0 696 316" fill="none">
         {paths.map((path) => (
           <motion.path
@@ -25,16 +35,20 @@ function FloatingPaths({ position }) {
             strokeWidth={path.width}
             strokeOpacity={0.05 + path.id * 0.015}
             initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + (path.id % 7) * 3,
-              repeat: Infinity,
-              ease: "linear",
-            }}
+            animate={
+              animating
+                ? { pathLength: 1, opacity: [0.3, 0.6, 0.3], pathOffset: [0, 1, 0] }
+                : { pathLength: 1, opacity: 0.45 }
+            }
+            transition={
+              animating
+                ? {
+                    duration: 20 + (path.id % 7) * 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }
+                : { duration: 0 }
+            }
           />
         ))}
       </svg>
@@ -44,7 +58,7 @@ function FloatingPaths({ position }) {
 
 const MinimalistHero = ({ imageSrc }) => {
   return (
-    <div className="relative flex min-h-[90vh] w-full flex-col items-center justify-center bg-cream px-6 py-10 md:px-12 md:py-0 md:h-[90vh] md:overflow-hidden">
+    <div className="relative flex min-h-[90vh] w-full flex-col items-center justify-center overflow-hidden bg-cream px-6 py-10 md:px-12 md:py-0 md:h-[90vh]">
       {/* Floating paths background */}
       <div className="absolute inset-0 overflow-hidden">
         <FloatingPaths position={1} />
@@ -82,7 +96,7 @@ const MinimalistHero = ({ imageSrc }) => {
           <motion.img
             src={imageSrc}
             alt="CrushBurg signature burger"
-            className="relative z-10 h-auto w-[320px] object-contain md:w-[420px] lg:w-[520px]"
+            className="relative z-10 h-auto w-full max-w-[320px] object-contain md:w-[420px] lg:w-[520px]"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
@@ -96,7 +110,7 @@ const MinimalistHero = ({ imageSrc }) => {
           transition={{ duration: 0.6, delay: 1 }}
           className="z-20 order-3 flex items-center justify-center text-center md:justify-end md:pl-8"
         >
-          <h1 className="text-5xl font-extrabold text-ink uppercase tracking-tight font-sans leading-none md:text-4xl lg:text-5xl whitespace-nowrap">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-ink uppercase tracking-tight font-sans leading-none md:text-4xl lg:text-5xl whitespace-nowrap">
             CRUSH<span className="text-brand">BURG</span>
           </h1>
         </motion.div>
