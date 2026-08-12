@@ -3,7 +3,7 @@ import { MapPin, Clock, ExternalLink, Utensils, ShoppingBag, Star, ArrowRight, P
 import { Timeline } from "../components/Timeline";
 import StoreGallery from "../components/StoreGallery";
 
-import { shop1, shop4 } from "../constants";
+import { shop1, shop4, shopCrownMall } from "../constants";
 import { motion } from "motion/react";
 import { useLenis } from "lenis/react";
 import { Link } from "react-router-dom";
@@ -117,13 +117,6 @@ const StoreCard = ({ store }) => {
           <ExternalLink size={15} />
           Get Directions
         </a>
-        <a
-          href="tel:+919511450700"
-          className="inline-flex items-center gap-2 border-2 border-brand text-brand font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-brand hover:text-white transition-colors"
-        >
-          <Phone size={15} />
-          Call Store
-        </a>
       </div>
     </div>
   );
@@ -160,21 +153,27 @@ const FranchiseCard = () => (
       </div>
     </div>
 
-    {/* Stats row */}
-    <div className="grid grid-cols-3 gap-4">
+    {/* Stats row — one card split into three cells rather than three separate
+        cards. Inside the timeline's narrow mobile column (~250px) three cards
+        each carrying p-5 left only ~33px of usable text width, so the values
+        spilled outside their card. Dropping the per-card padding and gaps gives
+        each cell ~70px instead.
+
+        Note: no `heading`/`para` classes here. Both are custom utilities in
+        index.css and are emitted AFTER Tailwind's size utilities, so they
+        silently override them — `heading text-2xl` rendered at 36px and
+        `para text-xs` at 14px, which is what caused the overflow. */}
+    <div className="bg-white border border-cream-dark rounded-2xl shadow-sm grid grid-cols-3 divide-x divide-cream-dark overflow-hidden">
       {[
         { label: "Outlets", value: "18+" },
         { label: "Cities", value: "2" },
         { label: "Happy Customers", value: "50K+" },
       ].map((stat) => (
-        <div
-          key={stat.label}
-          className="bg-white border border-cream-dark rounded-2xl p-5 text-center shadow-sm hover:shadow-md transition-shadow"
-        >
-          <p className="heading font-sans font-bold text-2xl md:text-3xl text-brand">
+        <div key={stat.label} className="px-1.5 py-4 text-center">
+          <p className="font-sans font-bold text-lg md:text-2xl text-brand leading-none">
             {stat.value}
           </p>
-          <p className="para font-primary text-muted text-xs mt-1 uppercase tracking-wide">
+          <p className="font-sans text-muted text-[10px] md:text-xs mt-1.5 uppercase tracking-wide leading-tight">
             {stat.label}
           </p>
         </div>
@@ -198,6 +197,16 @@ const FranchiseCard = () => (
 
 /* ── Timeline data ─────────────────────────────────────────────── */
 const stores = [
+  {
+    name: "CrushBurg — Crown Mall",
+    address:
+      "Crown Mall, Ayodhya Road, Chinhat, Lucknow, Uttar Pradesh 226028",
+    // isOpenNow() parses whole hours only — "10:30am" would misparse and blank
+    // the Open/Closed badge.
+    hours: "Mon–Sun: 10am – 10pm",
+    img: shopCrownMall,
+    link: "https://www.google.com/maps/search/?api=1&query=Crown+Mall+Ayodhya+Road+Chinhat+Lucknow",
+  },
   {
     name: "CrushBurg — Antas Mall",
     address:
@@ -326,7 +335,7 @@ const Store = () => {
                 Visit Us Today
               </h2>
               <p className="para font-primary text-muted-light mt-3 max-w-md text-sm md:text-base">
-                Both stores open 7 days a week. Walk in or call ahead — we're always ready to serve.
+                All our stores open 7 days a week. Walk in or call ahead — we're always ready to serve.
               </p>
             </div>
 

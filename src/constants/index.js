@@ -122,6 +122,10 @@ export const cardBackground =
 
 //shop pictures
 
+// Local asset, served from public/ — not on Cloudinary like the other shop
+// photos. Replace public/crown-outlet.jpg to swap in a higher-resolution shot.
+export const shopCrownMall = "/crown-outlet.jpg";
+
 export const shop =
   "https://res.cloudinary.com/dff30apwl/image/upload/q_auto,f_auto/v1758050606/cbshop_hfxfyd.jpg";
 
