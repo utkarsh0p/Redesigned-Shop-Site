@@ -325,7 +325,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cream relative overflow-x-hidden">
+    <div className="min-h-svh bg-cream relative overflow-x-clip">
       {/* Decorative background blobs */}
       <div className="absolute top-0 left-0 w-72 h-72 rounded-full bg-brand/5 blur-3xl pointer-events-none -translate-x-1/2" />
       <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-gold/10 blur-3xl pointer-events-none translate-x-1/3" />

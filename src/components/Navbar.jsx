@@ -76,7 +76,7 @@ const Navbar = () => {
       <motion.div
         animate={{ y: navVisible ? 0 : "-100%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="hidden md:flex fixed top-0 left-0 right-0 z-[9998] items-center justify-between px-8 py-3 bg-white shadow-md overflow-visible">
+        className="hidden md:flex fixed top-0 left-0 right-0 z-[9998] items-center justify-between px-8 py-3 pt-[calc(0.75rem_+_env(safe-area-inset-top))] bg-white shadow-md overflow-visible">
         <img src={logo} alt="CrushBurg" className="w-24 h-auto object-contain" />
         <AnimeNavBar />
         <div className="flex items-center gap-4">
@@ -88,7 +88,7 @@ const Navbar = () => {
       <motion.nav
         animate={{ y: navVisible ? 0 : "-100%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-ink flex items-center justify-between px-4 py-3 font-body">
+        className="md:hidden fixed top-0 left-0 right-0 z-[9998] bg-white shadow-md text-ink flex items-center justify-between px-4 py-3 pt-[calc(0.75rem_+_env(safe-area-inset-top))] font-body">
         <div className="w-20 flex-shrink-0">
           <img src={logo} alt="CrushBurg" className="w-full h-auto object-contain" />
         </div>
@@ -98,7 +98,9 @@ const Navbar = () => {
       </motion.nav>
 
       {/* ── Mobile Bottom Dock ── */}
-      <div className="fixed bottom-4 left-0 right-0 flex justify-center md:hidden z-50">
+      {/* bottom offset adds the safe-area inset so the dock clears the iOS home
+          indicator / Android gesture bar. Resolves to plain 1rem elsewhere. */}
+      <div className="fixed bottom-[calc(1rem_+_env(safe-area-inset-bottom))] left-0 right-0 flex justify-center md:hidden z-50">
         <div
           ref={dockRef}
           className="flex items-center gap-1 rounded-2xl border border-cream-dark bg-white p-1.5 shadow-lg"

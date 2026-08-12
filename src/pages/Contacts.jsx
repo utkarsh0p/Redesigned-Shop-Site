@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { motion } from "motion/react";
 import SlideButton from "../components/SlideButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -54,7 +55,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-cream pt-28 pb-16 md:py-24 padding-responsive">
+    <section className="bg-cream min-h-svh pt-28 pb-16 md:pt-24 md:pb-24 padding-responsive">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -66,48 +67,91 @@ const Contact = () => {
         theme="colored"
       />
 
-      <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
+      {/* Page hero — matches the centered eyebrow → title → subtitle band
+          used on Menu, FAQ and Store */}
+      <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+        <motion.p
+          className="text-brand font-semibold uppercase tracking-widest text-[11px] mb-3"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          We'd Love To Hear From You
+        </motion.p>
+        <motion.h1
+          className="heading font-sans font-bold text-ink uppercase tracking-tight mb-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          Contact <span className="text-brand">Us</span>
+        </motion.h1>
+        <motion.p
+          className="para font-primary text-ink-soft leading-relaxed"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          Questions, feedback, or collaboration opportunities — let us know how
+          we can help and we'll get back to you shortly.
+        </motion.p>
+      </div>
+
+      <div className="max-w-screen-xl mx-auto grid lg:grid-cols-[minmax(0,360px)_1fr] gap-8 lg:gap-14 items-start">
 
         {/* Left — Info */}
-        <div className="flex flex-col justify-between gap-10 max-w-sm mx-auto lg:mx-0 w-full">
-          <div className="text-center lg:text-left">
-            <h1 className="heading font-heading font-bold text-3xl md:text-5xl text-brand mb-3">
-              Contact Us
-            </h1>
-            <p className="para font-primary text-ink-soft leading-relaxed">
-              We are available for questions, feedback, or collaboration
-              opportunities. Let us know how we can help!
-            </p>
+        <motion.div
+          className="w-full bg-white rounded-2xl border border-cream-dark shadow-md p-7 md:p-8"
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          <h2 className="font-sans font-bold text-lg md:text-xl text-ink uppercase tracking-tight mb-6">
+            Contact Details
+          </h2>
+          <div className="flex flex-col gap-5">
+            {[
+              {
+                Icon: MapPin,
+                label: "Address",
+                value:
+                  "915, Purvanchal Capital Tower, Vibhuti Khand, Gomti Nagar, Lucknow, U.P. - 226010",
+              },
+              {
+                Icon: Phone,
+                label: "Phone",
+                value: "+91 9511450700",
+                href: "tel:+919511450700",
+              },
+              {
+                Icon: Mail,
+                label: "Email",
+                value: "hello@crushburg.com",
+                href: "mailto:hello@crushburg.com",
+              },
+            ].map((detail, i) => (
+              <motion.div
+                key={detail.label}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.45, delay: 0.3 + i * 0.1 }}
+              >
+                <ContactDetail {...detail} />
+              </motion.div>
+            ))}
           </div>
-
-          <div className="mx-auto lg:mx-0 w-full">
-            <h3 className="heading font-heading font-semibold text-xl md:text-2xl mb-6 text-center lg:text-left">
-              Contact Details
-            </h3>
-            <div className="flex flex-col gap-4">
-              <ContactDetail
-                Icon={MapPin}
-                label="Address"
-                value="915, Purvanchal Capital Tower, Vibhuti Khand, Gomti Nagar, Lucknow, U.P. - 226010"
-              />
-              <ContactDetail
-                Icon={Phone}
-                label="Phone"
-                value="+91 9511450700"
-                href="tel:+919511450700"
-              />
-              <ContactDetail
-                Icon={Mail}
-                label="Email"
-                value="hello@crushburg.com"
-                href="mailto:hello@crushburg.com"
-              />
-            </div>
-          </div>
-        </div>
+        </motion.div>
 
         {/* Right — Form */}
-        <div className="mx-auto w-full max-w-screen-md bg-white rounded-2xl border border-cream-dark shadow-md p-8 md:p-10">
+        <motion.div
+          className="w-full bg-white rounded-2xl border border-cream-dark shadow-md p-8 md:p-10"
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+        >
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col sm:flex-row gap-4">
               <FormField
@@ -178,7 +222,7 @@ const Contact = () => {
               />
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

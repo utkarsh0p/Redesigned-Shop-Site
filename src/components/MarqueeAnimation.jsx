@@ -46,7 +46,7 @@ function MarqueeAnimation({ children, className = "", direction = "left", baseVe
   });
 
   return (
-    <div ref={wrapperRef} className="overflow-hidden max-w-[100vw] whitespace-nowrap flex relative">
+    <div ref={wrapperRef} className="overflow-hidden max-w-full whitespace-nowrap flex relative">
       <motion.div
         className={`font-bold uppercase text-sm md:text-xl lg:text-2xl flex flex-nowrap whitespace-nowrap [&>span]:block [&>span]:mr-8 ${className}`}
         style={{ x }}

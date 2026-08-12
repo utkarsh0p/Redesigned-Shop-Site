@@ -117,7 +117,7 @@ const FAQ = () => {
   const toggle = (key) => setOpenItem(openItem === key ? null : key);
 
   return (
-    <section className="bg-cream min-h-screen pt-28 pb-20 padding-responsive">
+    <section className="bg-cream min-h-svh pt-28 pb-20 padding-responsive">
       <div className="max-w-3xl mx-auto">
 
         {/* Heading */}

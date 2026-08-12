@@ -49,7 +49,8 @@ function App() {
     <div>
       <ScrollToTop />
       <Navbar />
-      <div className="md:pt-[88px] pb-20 md:pb-0">
+      {/* bottom padding clears the mobile dock, including its safe-area offset */}
+      <div className="md:pt-[88px] pb-[calc(5rem_+_env(safe-area-inset-bottom))] md:pb-0">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/store" element={<Store />} />

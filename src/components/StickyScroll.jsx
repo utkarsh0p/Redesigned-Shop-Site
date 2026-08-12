@@ -49,7 +49,7 @@ const StickyScroll = ({ content }) => {
         {content.map((item, index) => (
           <div
             key={item.title + index}
-            className="min-h-screen flex flex-col justify-center py-24"
+            className="min-h-svh flex flex-col justify-center py-24"
           >
             <motion.h2
               animate={{ opacity: activeCard === index ? 1 : 0.25 }}

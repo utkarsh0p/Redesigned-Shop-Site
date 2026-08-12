@@ -327,7 +327,7 @@ const Franchise = () => {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-cream overflow-x-hidden">
+    <div ref={pageRef} className="min-h-svh bg-cream overflow-x-clip">
       <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover theme="colored" />
 
       {/* ── Decorative blobs ── */}
